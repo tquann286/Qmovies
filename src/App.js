@@ -1,12 +1,13 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
-
-import {Navbar} from './components/index';
+import {Navbar, Home} from './components/index';
 
 const App = () => {
+
 	return (
 		<React.Fragment>
 			<Navbar />
+			<Home />
 		</React.Fragment>
 
 	)
