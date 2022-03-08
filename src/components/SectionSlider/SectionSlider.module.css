@@ -1,0 +1,18 @@
+.secContainer {
+  margin: 32px 0;
+}
+
+.sectionTitle {
+	font-size: 26px;
+	line-height: 120%;
+	color: #f5f5f5;
+  margin-bottom: 12px;
+}
+
+.movieImage {
+	width: 190px;
+	height: 265px;
+	object-fit: cover;
+	user-select: none;
+  border-radius: 8px;
+}

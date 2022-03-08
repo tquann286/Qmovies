@@ -1,16 +1,8 @@
-a {
-	text-decoration: none;
-}
-
 .banContainer {
 	background-color: #888;
 	width: 100%;
 	height: 546px;
 }
-
-.movieContainer {
-}
-
 .movieImage {
 	object-fit: fill;
 	width: 100%;

@@ -16,10 +16,8 @@ import 'swiper/css/controller'
 import 'swiper/css/pagination';
 
 const BannerSection = ({bannerMovies}) => {
-	const { banContainer, movieContainer, movieImage, movieName, movieSlide } =
-		styles
+	const { banContainer, movieImage, movieName, movieSlide } = styles
 	
-
 	return (
 		<Swiper
 			className={banContainer}
