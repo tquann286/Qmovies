@@ -1,16 +1,17 @@
 import React from 'react'
 
 import styles from './Home.module.css'
-import {BannerSection} from '../index';
+import { BannerSection, ListMovies } from '../index'
 
 const Home = () => {
-  const {homeContainer} = styles
+	const { homeContainer } = styles
 
-  return (
-    <div className={homeContainer}>
-      <BannerSection />
-    </div>
-  )
+	return (
+		<div className={homeContainer}>
+			<BannerSection />
+      <ListMovies />
+		</div>
+	)
 }
 
 export default Home

@@ -44,7 +44,7 @@ const Navbar = () => {
 					<span>Explore</span>
 				</Link>
 				<Link className={navLink} to='/history'>
-					<FaHistory className={navIcon} />
+					<FaHistory className={navIcon} style={{fontSize: '27px'}} />
 					<span>History</span>
 				</Link>
 			</ul>

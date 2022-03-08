@@ -16,6 +16,9 @@ import 'swiper/css/navigation'
 import 'swiper/css/controller'
 import 'swiper/css/pagination';
 
+// import Skeleton from 'react-loading-skeleton'
+// import 'react-loading-skeleton/dist/skeleton.css'
+
 const BannerSection = () => {
 	const { banContainer, movieContainer, movieImage, movieName, movieSlide } =
 		styles
