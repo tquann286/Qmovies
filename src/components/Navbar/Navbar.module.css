@@ -15,17 +15,18 @@ button {
 }
 
 .navContainer {
-	display: flex;
+  display: flex;
 	padding: 28px;
 	align-items: center;
 	width: 100%;
 	height: 26px;
-  /* position: fixed;
-  top: 0; */
+  position: fixed;
+  top: 0;
+  z-index: 9999;
 }
 
 .navContainer a {
-  color: #0d90f3;
+  color: #fff;
 }
 
 .navLogo {

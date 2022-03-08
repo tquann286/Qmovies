@@ -10,3 +10,5 @@ const API = axios.create({
 })
 
 export const getHomePage = (page) => API.get(`/homePage/getHome?page=${page}`)
+
+// export const getMovieDetail
