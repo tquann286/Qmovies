@@ -94,11 +94,6 @@ body {
   color: #f5f5f5;
 }
 
-.lazy-load-image-background {
-  height: 100%;
-  width: 100%;
-  object-fit: fill;
-}
 
 .infinite-scroll-component {
   overflow: unset !important;
