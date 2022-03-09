@@ -7,11 +7,12 @@ import { BannerSection, ListMovies } from '../index'
 
 const Home = () => {
 	const { homeContainer } = styles
+	const [page, setPage] = useState(0)
 	const [bannerMovies, setBannerMovies] = useState([])
 	const [listMovies, setListMovies] = useState([])
 
 	useEffect(() => {
-		getHomePage(0).then((res) => {
+		getHomePage(page).then((res) => {
 			const { data } = res.data
 			data.recommendItems.shift()
 			setBannerMovies(data.recommendItems[0].recommendContentVOList)
@@ -23,7 +24,8 @@ const Home = () => {
 	return (
 		<div className={homeContainer}>
 			<BannerSection bannerMovies={bannerMovies} />
-			<ListMovies listMovies={listMovies} />
+			<ListMovies listMovies={listMovies} page={page}
+			setPage={setPage} />
 		</div>
 	)
 }

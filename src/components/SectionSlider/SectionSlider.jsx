@@ -11,19 +11,17 @@ import { Navigation } from 'swiper'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const SectionSlider = ({ movies }) => {
-	const { sectionTitle, movieImage, secContainer } = styles
-
-	console.log(movies)
+	const { sectionTitle, movieImage, secContainer, movieTitle } = styles
 
 	return (
 		<div className={secContainer}>
 			<h1 className={sectionTitle}>{movies.homeSectionName}</h1>
 			<Swiper
-				// install Swiper modules
 				modules={[Navigation]}
 				spaceBetween={40}
 				slidesPerView={6}
 				navigation
+				loop
 			>
 				{movies.recommendContentVOList.map((movie) => (
 					<SwiperSlide key={movie.id}>
@@ -34,6 +32,7 @@ const SectionSlider = ({ movies }) => {
 								alt={movie.title}
 								effect='opacity'
 							/>
+							<h3 className={movieTitle}>{movie.title}</h3>
 						</Link>
 					</SwiperSlide>
 				))}
