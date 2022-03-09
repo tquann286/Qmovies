@@ -28,7 +28,6 @@ const ListMovies = ({ listMovies, page, setPage }) => {
 			}
 			return prev + 1
 		})
-		console.log(page)
 	}
 
 	useEffect(() => {
@@ -37,7 +36,6 @@ const ListMovies = ({ listMovies, page, setPage }) => {
 				newListMovies.concat(filterSingleAlbum(res.data.data.recommendItems))
 			)
 		})
-		console.log(newListMovies)
 	}, [page])
 
 	return (

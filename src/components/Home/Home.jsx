@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+import { Navbar} from '../index'
+
 import { getHomePage } from '../../api'
 
 import styles from './Home.module.css'
@@ -22,11 +24,15 @@ const Home = () => {
 	}, [])
 
 	return (
+		<React.Fragment>
+		<Navbar />
 		<div className={homeContainer}>
 			<BannerSection bannerMovies={bannerMovies} />
 			<ListMovies listMovies={listMovies} page={page}
 			setPage={setPage} />
 		</div>
+		</React.Fragment>
+		
 	)
 }
 

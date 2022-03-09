@@ -11,4 +11,4 @@ const API = axios.create({
 
 export const getHomePage = (page) => API.get(`/homePage/getHome?page=${page}`)
 
-// export const getMovieDetail
+export const getDiscoveryVideo = (page) => API.get(`/app/recommendPool/getVideoFromRecommondPool?page=${page}`)

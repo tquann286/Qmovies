@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import {Navbar, Home} from './components/index';
+import { Home } from './components/index'
 
 const App = () => {
-
 	return (
-		<React.Fragment>
-			<Navbar />
-			<Home />
-		</React.Fragment>
-
+		<BrowserRouter>
+			<Routes>
+				<Route index element={<Home />} />
+			</Routes>
+		</BrowserRouter>
 	)
 }
 
