@@ -11,4 +11,10 @@ const API = axios.create({
 
 export const getHomePage = (page) => API.get(`/homePage/getHome?page=${page}`)
 
-export const getDiscoveryVideo = (page) => API.get(`/app/recommendPool/getVideoFromRecommondPool?page=${page}`)
+export const getDiscoveryVideos = (page) => API.get(`/recommendPool/getVideoFromRecommondPool?page=0${page}`, {
+  params: {
+    page,
+  },
+
+  headers: { deviceid: Math.random().toString(36).slice(-8) },
+})
