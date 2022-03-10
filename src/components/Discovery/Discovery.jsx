@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './Discovery.module.css'
 import noImage from './../../images/noImage.jfif'
@@ -9,6 +10,8 @@ import { Navbar } from '../index'
 import HlsPlayer from 'react-hls-player'
 import { InView } from 'react-intersection-observer'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { FaHeart } from 'react-icons/fa'
+import { MdOutlineOpenInNew } from 'react-icons/md'
 
 const Discovery = () => {
 	const {
@@ -22,6 +25,10 @@ const Discovery = () => {
 		postReact,
 		postVideoContainer,
 		postVideo,
+		postLikeCount,
+		postWatchNow,
+		postHeartIcon,
+postOpenIcon
 	} = styles
 
 	const [dicoveryVideos, setDicoveryVideos] = useState([])
@@ -79,7 +86,16 @@ const Discovery = () => {
 									</InView>
 								</div>
 							</div>
-							<div className={postReact}></div>
+							<div className={postReact}>
+								<div className={postLikeCount}>
+									<FaHeart className={postHeartIcon} />
+									<p>{post.likeCount}</p>
+								</div>
+								<Link to={`/movie/${post.id}`} className={postWatchNow}>
+									<MdOutlineOpenInNew className={postOpenIcon} />
+									<p>Watch</p>
+								</Link>
+							</div>
 						</div>
 					))}
 				</InfiniteScroll>
