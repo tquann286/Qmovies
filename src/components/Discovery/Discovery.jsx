@@ -8,7 +8,6 @@ import { getDiscoveryVideos } from '../../api'
 import { Navbar } from '../index'
 import HlsPlayer from 'react-hls-player'
 import { InView } from 'react-intersection-observer'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const Discovery = () => {
 	const {
@@ -20,8 +19,8 @@ const Discovery = () => {
 		postContentSection,
 		postCaption,
 		postReact,
-    postVideoContainer,
-    postVideo,
+		postVideoContainer,
+		postVideo,
 	} = styles
 
 	const [dicoveryVideos, setDicoveryVideos] = useState([])
@@ -53,15 +52,21 @@ const Discovery = () => {
 							<p className={postUpName}>{post.upInfo.upName}</p>
 							<p className={postCaption}>{post.introduction}</p>
 							<div className={postVideoContainer}>
-              <HlsPlayer
-              className={postVideo}
-              controls
-              muted
-              autoPlay={false}
-              playsInline
-              src={post.mediaUrl}
-            />
-              </div>
+								<InView threshold={0.5}>
+									{({ inView, ref }) => (
+										<div ref={ref}>
+											<HlsPlayer
+												
+												className={postVideo}
+												controls
+												autoPlay={inView}
+												playsInline
+												src={post.mediaUrl}
+											/>
+										</div>
+									)}
+								</InView>
+							</div>
 						</div>
 						<div className={postReact}></div>
 					</div>
