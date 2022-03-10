@@ -28,7 +28,8 @@ const Discovery = () => {
 		postLikeCount,
 		postWatchNow,
 		postHeartIcon,
-postOpenIcon
+		postOpenIcon,
+		reactContainer
 	} = styles
 
 	const [dicoveryVideos, setDicoveryVideos] = useState([])
@@ -87,14 +88,16 @@ postOpenIcon
 								</div>
 							</div>
 							<div className={postReact}>
-								<div className={postLikeCount}>
-									<FaHeart className={postHeartIcon} />
-									<p>{post.likeCount}</p>
+								<div className={reactContainer}>
+									<div className={postLikeCount}>
+										<FaHeart className={postHeartIcon} />
+										<p>{post.likeCount}</p>
+									</div>
+									<Link to={`/movie/${post.id}`} className={postWatchNow}>
+										<MdOutlineOpenInNew className={postOpenIcon} />
+										<p>Watch</p>
+									</Link>
 								</div>
-								<Link to={`/movie/${post.id}`} className={postWatchNow}>
-									<MdOutlineOpenInNew className={postOpenIcon} />
-									<p>Watch</p>
-								</Link>
 							</div>
 						</div>
 					))}
