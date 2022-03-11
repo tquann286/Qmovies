@@ -93,7 +93,11 @@ const Discovery = () => {
 										<FaHeart className={postHeartIcon} />
 										<p>{post.likeCount}</p>
 									</div>
-									<Link to={`/movie/${post.id}`} className={postWatchNow}>
+									<Link to={
+										post.refList[0]?.category === 0
+											? `/movie/${post.refList[0]?.id}`
+											: `/tv/${post.refList[0]?.id}`
+									} className={postWatchNow}>
 										<MdOutlineOpenInNew className={postOpenIcon} />
 										<p>Watch</p>
 									</Link>
