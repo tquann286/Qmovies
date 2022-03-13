@@ -41,8 +41,6 @@ const Discovery = () => {
 		})
 	}, [page])
 
-	console.log(dicoveryVideos)
-
 	return (
 		<React.Fragment>
 			<Navbar />
