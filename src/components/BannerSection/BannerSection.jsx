@@ -19,6 +19,8 @@ import 'swiper/css/autoplay';
 
 const BannerSection = ({bannerMovies}) => {
 	const { banContainer, movieImage, movieName, movieSlide } = styles
+
+	console.log(bannerMovies)
 	
 	return (
 		<Swiper
