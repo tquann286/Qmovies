@@ -58,5 +58,4 @@ const ListMovies = ({ listMovies, page, setPage }) => {
 		</div>
 	)
 }
-
 export default ListMovies
