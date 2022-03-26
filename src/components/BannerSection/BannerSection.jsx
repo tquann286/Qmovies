@@ -48,4 +48,5 @@ const BannerSection = ({bannerMovies}) => {
 		</Swiper> 
 	)
 }
+
 export default BannerSection
