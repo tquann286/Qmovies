@@ -49,5 +49,4 @@ const BannerSection = ({bannerMovies}) => {
 	)
 }
 
-
 export default BannerSection
