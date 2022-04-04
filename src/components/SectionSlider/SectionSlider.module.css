@@ -29,6 +29,7 @@
 	text-overflow: ellipsis;
 	user-select: none;
 	-ms-user-select: none;
+	transition: 0.1s;
 }
 
 .movieTitle:hover {
