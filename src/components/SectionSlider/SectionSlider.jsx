@@ -23,19 +23,23 @@ const SectionSlider = ({ movies }) => {
 				navigation
 				loop
 			>
-				{movies.recommendContentVOList.map((movie) => (
-					<SwiperSlide key={movie.id}>
-						<Link to={`/movie/${movie.id}`}>
-							<LazyLoadImage
-								className={movieImage}
-								src={movie.imageUrl}
-								alt={movie.title}
-								effect='opacity'
-							/>
-							<h3 className={movieTitle}>{movie.title}</h3>
-						</Link>
-					</SwiperSlide>
-				))}
+				{movies.recommendContentVOList.map((movie) => {
+					const contentType = movie.contentType.toLowerCase()
+					
+					return (
+						<SwiperSlide key={movie.id}>
+							<Link to={`/${contentType}/${movie.id}`}>
+								<LazyLoadImage
+									className={movieImage}
+									src={movie.imageUrl}
+									alt={movie.title}
+									effect='opacity'
+								/>
+								<h3 className={movieTitle}>{movie.title}</h3>
+							</Link>
+						</SwiperSlide>
+					)
+				})}
 			</Swiper>
 		</div>
 	)

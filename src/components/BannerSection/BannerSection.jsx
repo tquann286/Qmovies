@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import './index.css'
 import styles from './BannerSection.module.css'
@@ -20,6 +20,8 @@ import 'swiper/css/autoplay';
 const BannerSection = ({bannerMovies}) => {
 	const { banContainer, movieImage, movieName, movieSlide } = styles
 
+	// console.log(bannerMovies)
+
 	
 	return (
 		<Swiper
@@ -31,19 +33,23 @@ const BannerSection = ({bannerMovies}) => {
 			navigation={{ clickable: true }}
 			pagination={{ clickable: true }}
 		>
-			{bannerMovies.map((movie) => (
-				<SwiperSlide  key={movie.id}>
-					<Link className={movieSlide} to={`/movie/${movie.id}`}>
-						{movie.title && <h2 className={movieName}>{movie.title}</h2>}
-						<LazyLoadImage
-							className={movieImage}
-							src={movie.imageUrl}
-							alt={movie.title}
-							effect="opacity"
-						/>
-					</Link>
-				</SwiperSlide>
-			))}
+			{bannerMovies.map((movie) => {
+				
+
+				return (
+					<SwiperSlide  key={movie.id}>
+						<Link className={movieSlide} to={`/movie/${movie.id}`}>
+							{movie.title && <h2 className={movieName}>{movie.title}</h2>}
+							<LazyLoadImage
+								className={movieImage}
+								src={movie.imageUrl}
+								alt={movie.title}
+								effect="opacity"
+							/>
+						</Link>
+					</SwiperSlide>
+				)
+			})}
 		</Swiper> 
 	)
 }
