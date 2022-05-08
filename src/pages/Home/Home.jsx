@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { cloneDeep } from 'lodash'
 
 import styles from './Home.module.css'
 
@@ -13,11 +14,10 @@ const Home = () => {
 
 	useEffect(() => {
 		getHomePage(page).then((res) => {
-			const { data } = res.data
-			data.recommendItems.shift()
+			const { data } = cloneDeep(res.data)
+			console.log(data)
 			setBannerMovies(data.recommendItems[0].recommendContentVOList)
-			data.recommendItems.shift()
-			setListMovies(data.recommendItems)
+			setListMovies(data.recommendItems.shift())
 		})
 	}, [])
 
