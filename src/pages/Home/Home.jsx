@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash'
 
 import styles from './Home.module.css'
 
-import { Navbar, ListMovies, BannerSection } from '../../components'
+import { Navbar, ListMovies, BannerSection, ScrollToTop } from '../../components'
 import { getHomePage } from './../../api/index'
 
 const Home = () => {
@@ -15,7 +15,6 @@ const Home = () => {
 	useEffect(() => {
 		getHomePage(page).then((res) => {
 			const { data } = cloneDeep(res.data)
-			console.log(data)
 			setBannerMovies(data.recommendItems[0].recommendContentVOList)
 			setListMovies(data.recommendItems.shift())
 		})
@@ -28,6 +27,7 @@ const Home = () => {
 				<BannerSection bannerMovies={bannerMovies} />
 				<ListMovies listMovies={listMovies} page={page} setPage={setPage} />
 			</div>
+			<ScrollToTop />
 		</React.Fragment>
 	)
 }
