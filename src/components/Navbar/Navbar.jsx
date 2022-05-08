@@ -25,7 +25,7 @@ const Navbar = () => {
 
 	useEffect(() => {
 		const changeBgColor = () => {
-			if (window.scrollY >= 540) {
+			if (window.scrollY >= 536) {
 				setIsScrolled(true)
 			} else {
 				setIsScrolled(false)
