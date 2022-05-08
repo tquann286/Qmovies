@@ -22,15 +22,20 @@ const Navbar = () => {
 	} = styles
 
 	const [isScrolled, setIsScrolled ] = useState(false)
-	const changeBgColor = () => {
-		if (window.scrollY >= 540) {
-			setIsScrolled(true)
-		} else {
-			setIsScrolled(false)
-		}
-	}
 
-	window.addEventListener('scroll', changeBgColor)
+	useEffect(() => {
+		const changeBgColor = () => {
+			if (window.scrollY >= 540) {
+				setIsScrolled(true)
+			} else {
+				setIsScrolled(false)
+			}
+		}
+
+		window.addEventListener('scroll', changeBgColor)
+	}, [])
+
+	
 
 	return (
 		<div className={`${navContainer} ${isScrolled && navContainerScrolled}`}>
