@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './Navbar.module.css'
@@ -11,6 +11,7 @@ const Navbar = () => {
 	const {
 		gradientText,
 		navContainer,
+		navContainerScrolled,
 		navLogo,
 		navText,
 		navLogoIcon,
@@ -20,8 +21,19 @@ const Navbar = () => {
 		navIcon,
 	} = styles
 
+	const [isScrolled, setIsScrolled ] = useState(false)
+	const changeBgColor = () => {
+		if (window.scrollY >= 540) {
+			setIsScrolled(true)
+		} else {
+			setIsScrolled(false)
+		}
+	}
+
+	window.addEventListener('scroll', changeBgColor)
+
 	return (
-		<div className={navContainer}>
+		<div className={`${navContainer} ${isScrolled && navContainerScrolled}`}>
 			<div className={navLogo}>
 				<Link to='/'>
 					<img className={navLogoIcon} src={NavLogoIcon} alt='' />
@@ -44,7 +56,7 @@ const Navbar = () => {
 					<span>Explore</span>
 				</Link>
 				<Link className={navLink} to='/history'>
-					<FaHistory className={navIcon} style={{fontSize: '27px'}} />
+					<FaHistory className={navIcon} style={{ fontSize: '27px' }} />
 					<span>History</span>
 				</Link>
 			</ul>

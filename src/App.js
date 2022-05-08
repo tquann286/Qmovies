@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import {  Discovery } from './components/index'
 import Home from './pages/Home/Home'
+import Discovery from './pages/Discovery/Discovery'
 
 const App = () => {
 	return (
