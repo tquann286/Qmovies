@@ -34,11 +34,11 @@ const BannerSection = ({bannerMovies}) => {
 			pagination={{ clickable: true }}
 		>
 			{bannerMovies.map((movie) => {
-				
+				const contentType = movie.contentType.toLowerCase()
 
 				return (
 					<SwiperSlide  key={movie.id}>
-						<Link className={movieSlide} to={`/movie/${movie.id}`}>
+						<Link className={movieSlide} to={`/${contentType}/${movie.id}`}>
 							{movie.title && <h2 className={movieName}>{movie.title}</h2>}
 							<LazyLoadImage
 								className={movieImage}
