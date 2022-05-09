@@ -26,8 +26,14 @@ const Explore = () => {
 			<Navbar />
 			<div className={expMain}>
 				<div className={expMainCategory}>
-					<div className={cateName}>
+					<div className={`${cateName} ${isCateActive}`}>
 						TV Series
+					</div>
+					<div className={cateName}>
+						Movie
+					</div>
+					<div className={cateName}>
+						Anime
 					</div>
 				</div>
 			</div>
