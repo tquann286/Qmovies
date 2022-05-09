@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import styles from './Discovery.module.css'
-import noImage from './../../images/noImage.jfif'
+import styles from './Explore.module.css'
 
-import { getDiscoveryVideos } from '../../api'
-
-import { Navbar } from '../index'
-import HlsPlayer from 'react-hls-player'
-import { InView } from 'react-intersection-observer'
+import { Navbar } from '../../components'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { FaHeart } from 'react-icons/fa'
 import { MdOutlineOpenInNew } from 'react-icons/md'
