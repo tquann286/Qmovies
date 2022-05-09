@@ -14,28 +14,27 @@ const Explore = () => {
 		expMain,
 		expMainCategory,
 		cateName,
-		isCateActive,
+		cateActive,
 		expDetailsCategory,
 	} = styles
 
 	const [categories, setCategories] = useState([])
-	const [currentCate, setCurrentCate] = useState([])
-	console.log(categories)
+	const [currentCate, setCurrentCate] = useState('')
+	const [detailsCate, setDetailsCate] = useState([])
+	// console.log(categories)
+	// console.log(detailsCate)
 
 	useEffect(async () => {
 		const fetchCategories = await getSearchCategories()
 		if (fetchCategories) {
 			setCategories(fetchCategories)
 			setCurrentCate(fetchCategories[0].name)
+			setDetailsCate(fetchCategories[0].screeningItems)
 		}
 	}, [])
 
-	useEffect(() => {
-		
-	}, [currentCate])
-
-	const handleCategoryClick = () => {
-		
+	const handleCategoryClick = (categoryName) => {
+		setCurrentCate(categoryName);
 	}
 
 	return (
@@ -44,8 +43,13 @@ const Explore = () => {
 			<div className={expMain}>
 				<div className={expMainCategory}>
 				{categories.map(category => {
+					const {name} = category
+					let isActive = false
+
+					if (name === currentCate) isActive = true
+
 					return (
-						<div key={category.id} className={`${cateName} ${isCateActive}`} onClick={handleCategoryClick(category.name)}>{category.name}</div>
+						<div key={category.id} className={`${cateName} ${isActive && cateActive}`} onClick={() => handleCategoryClick(name)}>{name}</div>
 					)
 				})}
 					

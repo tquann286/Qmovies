@@ -45,4 +45,4 @@ const SectionSlider = ({ movies }) => {
 	)
 }
 
-export default SectionSlider
+export default React.memo(SectionSlider)

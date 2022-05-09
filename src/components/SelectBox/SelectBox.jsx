@@ -48,4 +48,4 @@ const SelectBox = () => {
 	)
 }
 
-export default SelectBox
+export default React.memo(SelectBox)
