@@ -39,3 +39,7 @@
 	-ms-transform: translateX(-50%);
 	transform: translateX(-50%);
 }
+
+.expDetailsCategory {
+	margin: 12px 0;
+}

@@ -38,7 +38,7 @@ const Explore = () => {
 					<div className={cateName}>Anime</div>
 				</div>
 				<div className={expDetailsCategory}>
-					
+					<SelectBox />
 				</div>
 			</div>
 		</div>
