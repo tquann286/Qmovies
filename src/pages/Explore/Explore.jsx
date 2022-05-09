@@ -16,6 +16,10 @@ const Explore = () => {
 		cateName,
 		cateActive,
 		expDetailsCategory,
+		expInfScrollContent,
+		contentContainer,
+		contentTitle,
+		contentImg,
 	} = styles
 
 	const [categories, setCategories] = useState([])
@@ -23,7 +27,7 @@ const Explore = () => {
 	const [detailsCate, setDetailsCate] = useState([])
 
 	const [exploreContent, setExploreContent] = useState([])
-
+	console.log(exploreContent)
 	const [searchPayload, setSearchPayload] = useState({
 		size: 20,
 		params: '',
@@ -42,14 +46,13 @@ const Explore = () => {
 			setCategories(fetchCategories)
 			setCurrentCate(defaultCate.name)
 			setDetailsCate(defaultCate.screeningItems)
-			setSearchPayload({ ... searchPayload, params: defaultCate.params})
+			setSearchPayload({ ...searchPayload, params: defaultCate.params })
 		}
 
 		const fetchExploreContent = await getExploreContent(searchPayload)
 		if (fetchExploreContent) {
 			setExploreContent(fetchExploreContent)
 		}
-		
 	}, [])
 
 	const handleCategoryClick = (categoryName) => {
@@ -82,6 +85,21 @@ const Explore = () => {
 					{detailsCate.map((category) => {
 						return <SelectBox key={category.name} category={category} />
 					})}
+				</div>
+				<div className={expInfScrollContent}>
+				<Link to='/17644'>
+					<div className={contentContainer}>
+							<div className={contentImg}>
+								<img
+									src='https://img.netpop.app/cover/20220509/1652084226799_91da620343a0187b3021d593847561f8dxqL09YSNA7Le75NBA4yOD8wjh0.jpg'
+									alt='Rage'
+								/>
+							</div>
+							<div className={contentTitle}>
+								<span>Rage</span>
+							</div>
+					</div>
+					</Link>
 				</div>
 			</div>
 		</div>
