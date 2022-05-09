@@ -48,10 +48,15 @@
 
 .expInfScrollContent {
 	display: flex;
+	flex-wrap: wrap;
+}
+
+.expInfScrollContent a {
+	width: 15%;
+	margin: auto;
 }
 
 .contentContainer {
-	width: 15%;
 	transition: 0.05s;
 }
 
