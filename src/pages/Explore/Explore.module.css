@@ -2,11 +2,21 @@
 display: flex;
 justify-content: center;
 }
+
 .expMain {
   width: 90%;
   background-color: #474747;
   height: 1500px;
+  margin-top: 72px;
 }
+
 .expMainCategory {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0.4px;
+}
+
+.isCateActive {
 
 }

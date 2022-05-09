@@ -9,15 +9,15 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { getSearchCategories } from '../../api'
 
 const Explore = () => {
-	const { expContainer, expMain, expMainCategory } = styles
+	const { expContainer, expMain, expMainCategory, cateName, isCateActive } = styles
 
-	const [typeCategories, setTypeCategories] = useState([])
-	console.log(typeCategories)
+	const [categories, setCategories] = useState([])
+	console.log(categories)
 
 	useEffect(async () => {
 		const fetchCategories = await getSearchCategories()
 		if (fetchCategories) {
-			setTypeCategories(fetchCategories)
+			setCategories(fetchCategories)
 		}
 	}, [])
 
@@ -26,7 +26,9 @@ const Explore = () => {
 			<Navbar />
 			<div className={expMain}>
 				<div className={expMainCategory}>
-					
+					<div className={cateName}>
+						TV Series
+					</div>
 				</div>
 			</div>
 		</div>
