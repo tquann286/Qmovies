@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useWindowScroll } from 'react-use'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
+import {IoIosArrowDropupCircle} from 'react-icons/io'
 
 import styles from './ScrollToTop.module.css'
 
@@ -23,7 +22,7 @@ const ScrollToTop = () => {
 
 	return (
 		<div className={`${sttContainer} ${visible && showScrollToTop}`}>
-			<FontAwesomeIcon className={sttIcon} icon={solid('circle-chevron-up')} onClick={onScrollToTop} />
+			<IoIosArrowDropupCircle className={sttIcon} onClick={onScrollToTop} />
 		</div>
 	)
 }
