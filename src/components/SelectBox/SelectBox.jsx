@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 
 import styles from './SelectBox.module.css'
 
-const SelectBox = () => {
+const SelectBox = ({ category }) => {
 	const {
 		selectBox,
 		optionsContainer,
@@ -16,7 +16,9 @@ const SelectBox = () => {
 		titleText,
 	} = styles
 
-	const [currentOption, setCurrentOption] = useState('All Region')
+	console.log(category)
+
+	const [currentOption, setCurrentOption] = useState(category.items[0].name)
 	const [isActive, setIsActive] = useState(false)
 
 	const toggleActive = () => {

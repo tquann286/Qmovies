@@ -21,8 +21,6 @@ const Explore = () => {
 	const [categories, setCategories] = useState([])
 	const [currentCate, setCurrentCate] = useState('')
 	const [detailsCate, setDetailsCate] = useState([])
-	// console.log(categories)
-	// console.log(detailsCate)
 
 	useEffect(async () => {
 		const fetchCategories = await getSearchCategories()
@@ -43,19 +41,24 @@ const Explore = () => {
 			<div className={expMain}>
 				<div className={expMainCategory}>
 				{categories.map(category => {
-					const {name} = category
+					const {name, id} = category
 					let isActive = false
 
 					if (name === currentCate) isActive = true
 
 					return (
-						<div key={category.id} className={`${cateName} ${isActive && cateActive}`} onClick={() => handleCategoryClick(name)}>{name}</div>
+						<div key={id} className={`${cateName} ${isActive && cateActive}`} onClick={() => handleCategoryClick(name)}>{name}</div>
 					)
 				})}
 					
 				</div>
 				<div className={expDetailsCategory}>
-					<SelectBox />
+					{detailsCate.map(category => {
+
+						return (
+							<SelectBox key={category.name} category={category} />
+						)
+					})}
 				</div>
 			</div>
 		</div>

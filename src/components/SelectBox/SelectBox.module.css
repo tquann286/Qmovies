@@ -2,6 +2,7 @@
   display: flex;
   width: 180px;
   flex-direction: column;
+  margin-right: 12px;
 }
 
 .selectBox .optionsContainer {
