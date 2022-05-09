@@ -54,6 +54,7 @@
 .expInfScrollContent a {
 	width: 15%;
 	margin: auto;
+	height: 300px;
 }
 
 .contentContainer {

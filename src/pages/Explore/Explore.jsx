@@ -26,6 +26,8 @@ const Explore = () => {
 	const [currentCate, setCurrentCate] = useState('')
 	const [detailsCate, setDetailsCate] = useState([])
 
+	const [isLoading, setisLoading] = useState(true)
+
 	const [exploreContent, setExploreContent] = useState([])
 	console.log(exploreContent)
 	const [searchPayload, setSearchPayload] = useState({
@@ -47,11 +49,12 @@ const Explore = () => {
 			setCurrentCate(defaultCate.name)
 			setDetailsCate(defaultCate.screeningItems)
 			setSearchPayload({ ...searchPayload, params: defaultCate.params })
+			setisLoading(false)
 		}
 
 		const fetchExploreContent = await getExploreContent(searchPayload)
 		if (fetchExploreContent) {
-			setExploreContent(fetchExploreContent)
+			setExploreContent(fetchExploreContent.searchResults)
 		}
 	}, [])
 
@@ -86,8 +89,22 @@ const Explore = () => {
 						return <SelectBox key={category.name} category={category} />
 					})}
 				</div>
-				<div className={expInfScrollContent}>
-				<Link to='/17644'>
+					<InfiniteScroll
+						dataLength={exploreContent.length}
+						// next={() => setPage((prev) => prev + 1)}
+						hasMore={true}
+						loader={<h4>Loading...</h4>}
+						endMessage={
+							<p style={{ textAlign: 'center' }}>
+								<b>Yay! You have seen it all</b>
+							</p>
+						}
+					>
+					<div className={expInfScrollContent}>
+					{exploreContent.map(content => {
+
+						return (
+							<Link key={content.id} to='/17644'>
 					<div className={contentContainer}>
 							<div className={contentImg}>
 								<img
@@ -100,10 +117,14 @@ const Explore = () => {
 							</div>
 					</div>
 					</Link>
+						)
+					})}
+					</div>
+					</InfiniteScroll>
 				</div>
-			</div>
 		</div>
 	)
 }
 
 export default Explore
+
