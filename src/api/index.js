@@ -39,3 +39,9 @@ export const getDiscoveryVideos = async (page = 0) => {
 		mediaUrl: sources[index],
 	}))
 }
+
+export const getSearchCategories = async () => {
+	const data = await (await API.get('search/list')).data.data
+
+	return data
+}

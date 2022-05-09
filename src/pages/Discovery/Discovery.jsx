@@ -6,7 +6,7 @@ import noImage from '../../images/noImage.jfif'
 
 import { getDiscoveryVideos } from '../../api'
 
-import { Navbar } from '../../components'
+import { Navbar, ScrollToTop } from '../../components'
 import HlsPlayer from 'react-hls-player'
 import { InView } from 'react-intersection-observer'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -105,6 +105,7 @@ const Discovery = () => {
 					))}
 				</InfiniteScroll>
 			</div>
+			<ScrollToTop />
 		</React.Fragment>
 	)
 }

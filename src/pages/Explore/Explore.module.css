@@ -1,0 +1,12 @@
+.expContainer {
+display: flex;
+justify-content: center;
+}
+.expMain {
+  width: 90%;
+  background-color: #474747;
+  height: 1500px;
+}
+.expMainCategory {
+
+}
