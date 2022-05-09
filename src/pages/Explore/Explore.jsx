@@ -3,13 +3,20 @@ import { Link } from 'react-router-dom'
 
 import styles from './Explore.module.css'
 
-import { Navbar, ScrollToTop } from '../../components'
+import { Navbar, ScrollToTop, SelectBox } from '../../components'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { getSearchCategories } from '../../api'
 
 const Explore = () => {
-	const { expContainer, expMain, expMainCategory, cateName, isCateActive } = styles
+	const {
+		expContainer,
+		expMain,
+		expMainCategory,
+		cateName,
+		isCateActive,
+		expDetailsCategory,
+	} = styles
 
 	const [categories, setCategories] = useState([])
 	console.log(categories)
@@ -26,15 +33,12 @@ const Explore = () => {
 			<Navbar />
 			<div className={expMain}>
 				<div className={expMainCategory}>
-					<div className={`${cateName} ${isCateActive}`}>
-						TV Series
-					</div>
-					<div className={cateName}>
-						Movie
-					</div>
-					<div className={cateName}>
-						Anime
-					</div>
+					<div className={`${cateName} ${isCateActive}`}>TV Series</div>
+					<div className={cateName}>Movie</div>
+					<div className={cateName}>Anime</div>
+				</div>
+				<div className={expDetailsCategory}>
+					
 				</div>
 			</div>
 		</div>
