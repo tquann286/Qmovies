@@ -29,23 +29,28 @@ const SelectBox = ({ category }) => {
 		toggleActive()
 	}
 
-	const handleOptionOnClick = () => {
+	const handleOptionOnClick = (cateName) => {
 		setIsActive(false)
-		setCurrentOption('Automobiles')
+		setCurrentOption(cateName)
 	}
 
 	return (
 		<div className={selectBox}>
 			<div className={`${optionsContainer} ${isActive && active}`}>
-				<div className={option} onClick={handleOptionOnClick}>
+				{category.items.map(item => {
+
+					return (
+						<div key={item.name} className={option} onClick={() => handleOptionOnClick(item.name)}>
 					<input
 						type='radio'
 						className={radio}
-						id='automobiles'
+						id={item.name}
 						name='category'
 					/>
-					<label htmlFor='automobiles'>Automobiles</label>
+					<label htmlFor={item.name}>{item.name}</label>
 				</div>
+					)
+				})}
 			</div>
 			<div className={selected} onClick={handleTitleOnClick}>
 				<div className={titleText}>{currentOption}</div>
