@@ -6,7 +6,7 @@ import styles from './Explore.module.css'
 import { Navbar, ScrollToTop, SelectBox } from '../../components'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-import { getSearchCategories } from '../../api'
+import { getSearchCategories, getExploreContent } from '../../api'
 
 const Explore = () => {
 	const {
@@ -22,17 +22,38 @@ const Explore = () => {
 	const [currentCate, setCurrentCate] = useState('')
 	const [detailsCate, setDetailsCate] = useState([])
 
+	const [exploreContent, setExploreContent] = useState([])
+
+	const [searchPayload, setSearchPayload] = useState({
+		size: 20,
+		params: '',
+		area: '',
+		category: '',
+		year: '',
+		subtitles: '',
+		order: 'up',
+		sort: '',
+	})
+
 	useEffect(async () => {
 		const fetchCategories = await getSearchCategories()
 		if (fetchCategories) {
+			const defaultCate = fetchCategories[0]
 			setCategories(fetchCategories)
-			setCurrentCate(fetchCategories[0].name)
-			setDetailsCate(fetchCategories[0].screeningItems)
+			setCurrentCate(defaultCate.name)
+			setDetailsCate(defaultCate.screeningItems)
+			setSearchPayload({ ... searchPayload, params: defaultCate.params})
 		}
+
+		const fetchExploreContent = await getExploreContent(searchPayload)
+		if (fetchExploreContent) {
+			setExploreContent(fetchExploreContent)
+		}
+		
 	}, [])
 
 	const handleCategoryClick = (categoryName) => {
-		setCurrentCate(categoryName);
+		setCurrentCate(categoryName)
 	}
 
 	return (
@@ -40,24 +61,26 @@ const Explore = () => {
 			<Navbar />
 			<div className={expMain}>
 				<div className={expMainCategory}>
-				{categories.map(category => {
-					const {name, id} = category
-					let isActive = false
+					{categories.map((category) => {
+						const { name, id } = category
+						let isActive = false
 
-					if (name === currentCate) isActive = true
-
-					return (
-						<div key={id} className={`${cateName} ${isActive && cateActive}`} onClick={() => handleCategoryClick(name)}>{name}</div>
-					)
-				})}
-					
-				</div>
-				<div className={expDetailsCategory}>
-					{detailsCate.map(category => {
+						if (name === currentCate) isActive = true
 
 						return (
-							<SelectBox key={category.name} category={category} />
+							<div
+								key={id}
+								className={`${cateName} ${isActive && cateActive}`}
+								onClick={() => handleCategoryClick(name)}
+							>
+								{name}
+							</div>
 						)
+					})}
+				</div>
+				<div className={expDetailsCategory}>
+					{detailsCate.map((category) => {
+						return <SelectBox key={category.name} category={category} />
 					})}
 				</div>
 			</div>

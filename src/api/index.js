@@ -41,7 +41,13 @@ export const getDiscoveryVideos = async (page = 0) => {
 }
 
 export const getSearchCategories = async () => {
-	const data = await (await API.get('search/list')).data.data
+	const data = (await API.get('search/list')).data.data
 
 	return data
+}
+
+export const getExploreContent = async (searchQuery) => {
+	const data = (await API.post('search/v1/search', searchQuery)).data.data
+	
+	return data 
 }

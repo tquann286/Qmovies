@@ -16,8 +16,6 @@ const SelectBox = ({ category }) => {
 		titleText,
 	} = styles
 
-	console.log(category)
-
 	const [currentOption, setCurrentOption] = useState(category.items[0].name)
 	const [isActive, setIsActive] = useState(false)
 
