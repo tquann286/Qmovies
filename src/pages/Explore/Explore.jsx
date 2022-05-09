@@ -29,7 +29,6 @@ const Explore = () => {
 	const [isLoading, setisLoading] = useState(true)
 
 	const [exploreContent, setExploreContent] = useState([])
-	console.log(exploreContent)
 	const [searchPayload, setSearchPayload] = useState({
 		size: 20,
 		params: '',
@@ -102,18 +101,19 @@ const Explore = () => {
 					>
 					<div className={expInfScrollContent}>
 					{exploreContent.map(content => {
+						console.log(content);
 
 						return (
-							<Link key={content.id} to='/17644'>
+							<Link key={content.id} to={content.domainType === 0 ? `/movie/${content.id}`: `/drama/${content.id}`} >
 					<div className={contentContainer}>
 							<div className={contentImg}>
 								<img
-									src='https://img.netpop.app/cover/20220509/1652084226799_91da620343a0187b3021d593847561f8dxqL09YSNA7Le75NBA4yOD8wjh0.jpg'
-									alt='Rage'
+									src={content.coverVerticalUrl}
+									alt={content.name}
 								/>
 							</div>
 							<div className={contentTitle}>
-								<span>Rage</span>
+								<h6>{content.name}</h6>
 							</div>
 					</div>
 					</Link>
