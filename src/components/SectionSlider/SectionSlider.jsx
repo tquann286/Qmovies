@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './SectionSlider.module.css'
@@ -25,7 +25,7 @@ const SectionSlider = ({ movies }) => {
 			>
 				{movies.recommendContentVOList.map((movie) => {
 					const contentType = movie.contentType.toLowerCase()
-					
+
 					return (
 						<SwiperSlide key={movie.id}>
 							<Link to={`/${contentType}/${movie.id}`}>
@@ -45,4 +45,4 @@ const SectionSlider = ({ movies }) => {
 	)
 }
 
-export default React.memo(SectionSlider)
+export default memo(SectionSlider)

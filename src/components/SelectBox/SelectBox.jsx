@@ -1,27 +1,36 @@
-import React, {useState} from 'react'
+import React, { useState, memo } from 'react'
 
-import {MdOutlineKeyboardArrowDown} from 'react-icons/md'
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 
 import styles from './SelectBox.module.css'
 
 const SelectBox = () => {
-	const { selectBox, optionsContainer, option, radio, selected, active, arrowDownIcon, titleText } = styles
+	const {
+		selectBox,
+		optionsContainer,
+		option,
+		radio,
+		selected,
+		active,
+		arrowDownIcon,
+		titleText,
+	} = styles
 
-  const [currentOption, setCurrentOption] = useState('All Region')
-  const [isActive, setIsActive] = useState(false)
+	const [currentOption, setCurrentOption] = useState('All Region')
+	const [isActive, setIsActive] = useState(false)
 
-  const toggleActive = () => {
-    setIsActive(!isActive)
-  }
+	const toggleActive = () => {
+		setIsActive(!isActive)
+	}
 
-  const handleTitleOnClick = () => {
-    toggleActive()
-  }
+	const handleTitleOnClick = () => {
+		toggleActive()
+	}
 
-  const handleOptionOnClick = () => {
-    setIsActive(false)
-    setCurrentOption('Automobiles')
-  }
+	const handleOptionOnClick = () => {
+		setIsActive(false)
+		setCurrentOption('Automobiles')
+	}
 
 	return (
 		<div className={selectBox}>
@@ -37,15 +46,13 @@ const SelectBox = () => {
 				</div>
 			</div>
 			<div className={selected} onClick={handleTitleOnClick}>
-      <div className={titleText}>
-      {currentOption}
-      </div>
-        <div className={`${arrowDownIcon} ${isActive && active}`}>
-        <MdOutlineKeyboardArrowDown />
-        </div>
-      </div>
+				<div className={titleText}>{currentOption}</div>
+				<div className={`${arrowDownIcon} ${isActive && active}`}>
+					<MdOutlineKeyboardArrowDown />
+				</div>
+			</div>
 		</div>
 	)
 }
 
-export default React.memo(SelectBox)
+export default memo(SelectBox)

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { useWindowScroll } from 'react-use'
-import {IoIosArrowDropupCircle} from 'react-icons/io'
+import { IoIosArrowDropupCircle } from 'react-icons/io'
 
 import styles from './ScrollToTop.module.css'
 
@@ -27,4 +27,4 @@ const ScrollToTop = () => {
 	)
 }
 
-export default React.memo(ScrollToTop)
+export default memo(ScrollToTop)
