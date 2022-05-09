@@ -20,7 +20,7 @@ const SelectBox = () => {
 
   const handleOptionOnClick = () => {
     setIsActive(false)
-    setCurrentOption('Automobilesaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    setCurrentOption('Automobiles')
   }
 
 	return (
