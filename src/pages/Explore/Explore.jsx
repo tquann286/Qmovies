@@ -26,8 +26,13 @@ const Explore = () => {
 		const fetchCategories = await getSearchCategories()
 		if (fetchCategories) {
 			setCategories(fetchCategories)
+			setCurrentCate(fetchCategories[0].name)
 		}
 	}, [])
+
+	useEffect(() => {
+		
+	}, [currentCate])
 
 	const handleCategoryClick = () => {
 		
@@ -38,9 +43,12 @@ const Explore = () => {
 			<Navbar />
 			<div className={expMain}>
 				<div className={expMainCategory}>
-					<div className={`${cateName} ${isCateActive}`} onClick={handleCategoryClick}>TV Series</div>
-					<div className={cateName}>Movie</div>
-					<div className={cateName}>Anime</div>
+				{categories.map(category => {
+					return (
+						<div key={category.id} className={`${cateName} ${isCateActive}`} onClick={handleCategoryClick(category.name)}>{category.name}</div>
+					)
+				})}
+					
 				</div>
 				<div className={expDetailsCategory}>
 					<SelectBox />
