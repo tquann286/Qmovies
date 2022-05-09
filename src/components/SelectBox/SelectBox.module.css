@@ -59,7 +59,7 @@
 
 .selectBox .option,
 .selected {
-  padding: 12px 24px;
+  padding: 10px 20px;
   cursor: pointer;
 }
 
@@ -79,6 +79,7 @@
   display: inline-block;
   float: right;
   font-size: 14px;
+  padding: 2px 0;
   transition: 0.2s;
 }
 
