@@ -8,7 +8,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 const Explore = () => {
 	return (
-		<div></div>
+		<div>Explore</div>
 	)
 }
 

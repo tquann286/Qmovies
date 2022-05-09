@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Home from './pages/Home/Home'
-import Discovery from './pages/Discovery/Discovery'
+import { Home, Discovery, Explore } from './pages'
 
 const App = () => {
 	return (
@@ -10,7 +9,8 @@ const App = () => {
 			<Routes>
 				<Route index element={<Home />} />
 				<Route path='/discovery' element={<Discovery />} />
-			</Routes>	
+				<Route path='/explore' element={<Explore />} />
+			</Routes>
 		</BrowserRouter>
 	)
 }
