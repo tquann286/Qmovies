@@ -17,12 +17,21 @@
 }
 
 .selected {
+  width: 100%;
   background: #2f3640;
   border-radius: 8px;
   margin-bottom: 4px;
   color: #f5f6fa;
   position: relative;
   order: 0;
+}
+
+.titleText {
+  display: inline-block;
+  width: 89%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .selectBox .optionsContainer.active {

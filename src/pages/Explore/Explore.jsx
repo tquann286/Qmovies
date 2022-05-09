@@ -19,6 +19,7 @@ const Explore = () => {
 	} = styles
 
 	const [categories, setCategories] = useState([])
+	const [currentCate, setCurrentCate] = useState([])
 	console.log(categories)
 
 	useEffect(async () => {
@@ -28,12 +29,16 @@ const Explore = () => {
 		}
 	}, [])
 
+	const handleCategoryClick = () => {
+		
+	}
+
 	return (
 		<div className={expContainer}>
 			<Navbar />
 			<div className={expMain}>
 				<div className={expMainCategory}>
-					<div className={`${cateName} ${isCateActive}`}>TV Series</div>
+					<div className={`${cateName} ${isCateActive}`} onClick={handleCategoryClick}>TV Series</div>
 					<div className={cateName}>Movie</div>
 					<div className={cateName}>Anime</div>
 				</div>

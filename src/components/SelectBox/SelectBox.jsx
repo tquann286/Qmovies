@@ -5,7 +5,7 @@ import {MdOutlineKeyboardArrowDown} from 'react-icons/md'
 import styles from './SelectBox.module.css'
 
 const SelectBox = () => {
-	const { selectBox, optionsContainer, option, radio, selected, active, arrowDownIcon } = styles
+	const { selectBox, optionsContainer, option, radio, selected, active, arrowDownIcon, titleText } = styles
 
   const [currentOption, setCurrentOption] = useState('All Region')
   const [isActive, setIsActive] = useState(false)
@@ -20,7 +20,7 @@ const SelectBox = () => {
 
   const handleOptionOnClick = () => {
     setIsActive(false)
-    setCurrentOption('Automobiles')
+    setCurrentOption('Automobilesaaaaaaaaaaaaaaaaaaaaaaaaaaa')
   }
 
 	return (
@@ -37,7 +37,9 @@ const SelectBox = () => {
 				</div>
 			</div>
 			<div className={selected} onClick={handleTitleOnClick}>
-        {currentOption}
+      <div className={titleText}>
+      {currentOption}
+      </div>
         <div className={`${arrowDownIcon} ${isActive && active}`}>
         <MdOutlineKeyboardArrowDown />
         </div>
