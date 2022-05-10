@@ -13,8 +13,6 @@ const Explore = () => {
 		expContainer,
 		expMain,
 		expMainCategory,
-		cateName,
-		cateActive,
 		expDetailsCategory,
 		expInfScrollContent,
 		contentContainer,
@@ -25,6 +23,8 @@ const Explore = () => {
 	const [categories, setCategories] = useState([])
 	const [currentCate, setCurrentCate] = useState('')
 	const [detailsCate, setDetailsCate] = useState([])
+
+	const [isLoading, setIsLoading] = useState(true)
 
 	const [exploreContent, setExploreContent] = useState([])
 	const [searchPayload, setSearchPayload] = useState({
@@ -47,10 +47,7 @@ const Explore = () => {
 			setSearchPayload({ ...searchPayload, params: defaultCate.params })
 		}
 
-		const fetchExploreContent = await getExploreContent(searchPayload)
-		if (fetchExploreContent) {
-			setExploreContent(fetchExploreContent.searchResults)
-		}
+		setIsLoading(false)
 	}, [])
 
 	useEffect(async () => {
@@ -72,7 +69,10 @@ const Explore = () => {
 	}
 
 	const handleLoadMoreContent = () => {
-		setSearchPayload((prevSearchPayload) => ({ ...prevSearchPayload, size: prevSearchPayload.size + 30 }))
+		setSearchPayload((prevSearchPayload) => ({
+			...prevSearchPayload,
+			size: prevSearchPayload.size + 30,
+		}))
 	}
 
 	return (
@@ -85,7 +85,9 @@ const Explore = () => {
 							<CategoryTitle
 								key={category.id}
 								category={category}
-								handleCategoryClick={() => handleCategoryClick(category.name, category.params)}
+								handleCategoryClick={() =>
+									handleCategoryClick(category.name, category.params)
+								}
 								currentCate={currentCate}
 							/>
 						)
@@ -93,49 +95,57 @@ const Explore = () => {
 				</div>
 				<div className={expDetailsCategory}>
 					{detailsCate.map((category) => {
-						return <SelectBox key={category.name} category={category} onSearchPayloadChange={onSearchPayloadChange} />
+						return (
+							<SelectBox
+								key={category.name}
+								category={category}
+								onSearchPayloadChange={onSearchPayloadChange}
+							/>
+						)
 					})}
 				</div>
-				{exploreContent.length !== 0 ? (
+				{!isLoading ? (
 					<InfiniteScroll
-					dataLength={exploreContent.length}
-					next={handleLoadMoreContent}
-					hasMore={true}
-					loader={<h4>Loading...</h4>}
-					endMessage={
-						<p style={{ textAlign: 'center' }}>
-							<b>Yay! You have seen it all</b>
-						</p>
-					}
-				>
-					<div className={expInfScrollContent}>
-						{exploreContent.map((content) => {
-							return (
-								<Link
-									key={content.id}
-									to={
-										content.domainType === 0
-											? `/movie/${content.id}`
-											: `/drama/${content.id}`
-									}
-								>
-									<div className={contentContainer}>
-										<div className={contentImg}>
-											<img src={content.coverVerticalUrl} alt={content.name} />
+						dataLength={exploreContent.length}
+						next={handleLoadMoreContent}
+						hasMore={!isLoading && exploreContent.length !== 0}
+						loader={<h4>Loading...</h4>}
+						endMessage={
+							<p style={{ textAlign: 'center' }}>
+								<b>Yay! You have seen it all</b>
+							</p>
+						}
+					>
+						<div className={expInfScrollContent}>
+							{exploreContent.map((content) => {
+								return (
+									<Link
+										key={content.id}
+										to={
+											content.domainType === 0
+												? `/movie/${content.id}`
+												: `/drama/${content.id}`
+										}
+									>
+										<div className={contentContainer}>
+											<div className={contentImg}>
+												<img
+													src={content.coverVerticalUrl}
+													alt={content.name}
+												/>
+											</div>
+											<div className={contentTitle}>
+												<h6>{content.name}</h6>
+											</div>
 										</div>
-										<div className={contentTitle}>
-											<h6>{content.name}</h6>
-										</div>
-									</div>
-								</Link>
-							)
-						})}
-					</div>
-				</InfiniteScroll>
+									</Link>
+								)
+							})}
+						</div>
+					</InfiniteScroll>
 				) : (
-					<h4>Nothing to see.</h4>
+					<h4>Loading...</h4>
 				)}
-				
 			</div>
 			<ScrollToTop />
 		</div>
