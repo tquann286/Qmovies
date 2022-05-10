@@ -137,6 +137,7 @@ const Explore = () => {
 				)}
 				
 			</div>
+			<ScrollToTop />
 		</div>
 	)
 }
