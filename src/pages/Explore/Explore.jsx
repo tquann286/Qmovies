@@ -73,7 +73,6 @@ const Explore = () => {
 
 	const handleLoadMoreContent = () => {
 		setSearchPayload((prevSearchPayload) => ({ ...prevSearchPayload, size: prevSearchPayload.size + 30 }))
-		console.log(searchPayload)
 	}
 
 	return (

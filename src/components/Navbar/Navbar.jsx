@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import styles from './Navbar.module.css'
 import NavLogoIcon from '../../images/q-icon.svg'
@@ -21,11 +21,15 @@ const Navbar = () => {
 		navIcon,
 	} = styles
 
-	const [isScrolled, setIsScrolled ] = useState(false)
+	const location = useLocation()
+	const [isScrolled, setIsScrolled] = useState(false)
 
 	useEffect(() => {
+		const { scrollBgChangeHeight } = navbarMenuData.filter(
+			(data) => location.pathname === data.direction
+		)[0]
 		const changeBgColor = () => {
-			if (window.scrollY >= 536) {
+			if (window.scrollY >= scrollBgChangeHeight) {
 				setIsScrolled(true)
 			} else {
 				setIsScrolled(false)
@@ -33,9 +37,11 @@ const Navbar = () => {
 		}
 
 		window.addEventListener('scroll', changeBgColor)
-	}, [])
 
-	
+		return () => {
+			window.removeEventListener('scroll', changeBgColor)
+		}
+	}, [])
 
 	return (
 		<div className={`${navContainer} ${isScrolled && navContainerScrolled}`}>
@@ -48,12 +54,17 @@ const Navbar = () => {
 				</Link>
 			</div>
 			<ul className={navMain}>
-			{navbarMenuData.map(data => (
-				<Link key={data.title} className={navLink} to={data.direction} onClick={onScrollToTop}>
-					{data.icon}
-					<span>{data.title}</span>
-				</Link>
-			))}
+				{navbarMenuData.map((data) => (
+					<Link
+						key={data.title}
+						className={navLink}
+						to={data.direction}
+						onClick={onScrollToTop}
+					>
+						{data.icon}
+						<span>{data.title}</span>
+					</Link>
+				))}
 			</ul>
 			<div className={navUser}>
 				<Link className={navLink} to='/auth'>
