@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 
 import styles from './SelectBox.module.css'
 
-const SelectBox = ({ category }) => {
+const SelectBox = ({ category, onSearchPayloadChange }) => {
 	const {
 		selectBox,
 		optionsContainer,
@@ -27,18 +27,20 @@ const SelectBox = ({ category }) => {
 		toggleActive()
 	}
 
-	const handleOptionOnClick = (cateName) => {
+	const handleOptionOnClick = (cateName, type, params) => {
 		setIsActive(false)
 		setCurrentOption(cateName)
+		onSearchPayloadChange(type, params)
 	}
 
 	return (
 		<div className={selectBox}>
 			<div className={`${optionsContainer} ${isActive && active}`}>
 				{category.items.map(item => {
+					const { name, params, screeningType } = item
 
 					return (
-						<div key={item.name} className={option} onClick={() => handleOptionOnClick(item.name)}>
+						<div key={item.name} className={option} onClick={() => handleOptionOnClick(name, screeningType, params)}>
 					<input
 						type='radio'
 						className={radio}

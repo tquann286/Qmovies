@@ -21,7 +21,32 @@ const Navbar = () => {
 		navIcon,
 	} = styles
 
+	const navbarMenuData = [
+		{
+			title: 'Home',
+			direction: '/',
+			icon: <AiOutlineHome className={navIcon} />
+		},
+		{
+			title: 'Explore',
+			direction: '/explore',
+			icon: <RiCompassDiscoverLine className={navIcon} />
+		},
+		{
+			title: 'Discovery',
+			direction: '/discovery',
+			icon: <FaWpexplorer className={navIcon} />
+		},
+		{
+			title: 'History',
+			direction: '/History',
+			icon: <FaHistory className={navIcon} style={{ fontSize: '27px' }} />
+		},
+	]
+
 	const [isScrolled, setIsScrolled ] = useState(false)
+
+	const onScrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 	useEffect(() => {
 		const changeBgColor = () => {
@@ -40,30 +65,20 @@ const Navbar = () => {
 	return (
 		<div className={`${navContainer} ${isScrolled && navContainerScrolled}`}>
 			<div className={navLogo}>
-				<Link to='/'>
+				<Link to='/' onClick={onScrollToTop}>
 					<img className={navLogoIcon} src={NavLogoIcon} alt='' />
 				</Link>
-				<Link to='/'>
+				<Link to='/' onClick={onScrollToTop}>
 					<span className={`${navText} ${gradientText}`}>movies</span>
 				</Link>
 			</div>
 			<ul className={navMain}>
-				<Link className={navLink} to='/'>
-					<AiOutlineHome className={navIcon} />
-					<span style={{ marginTop: '5px' }}>Home</span>
+			{navbarMenuData.map(data => (
+				<Link key={data.title} className={navLink} to={data.direction} onClick={onScrollToTop}>
+					{data.icon}
+					<span>{data.title}</span>
 				</Link>
-				<Link className={navLink} to='/discovery'>
-					<RiCompassDiscoverLine className={navIcon} />
-					<span>Discovery</span>
-				</Link>
-				<Link className={navLink} to='/explore'>
-					<FaWpexplorer className={navIcon} />
-					<span>Explore</span>
-				</Link>
-				<Link className={navLink} to='/history'>
-					<FaHistory className={navIcon} style={{ fontSize: '27px' }} />
-					<span>History</span>
-				</Link>
+			))}
 			</ul>
 			<div className={navUser}>
 				<Link className={navLink} to='/auth'>

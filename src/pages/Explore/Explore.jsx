@@ -28,16 +28,14 @@ const Explore = () => {
 
 	const [exploreContent, setExploreContent] = useState([])
 	const [searchPayload, setSearchPayload] = useState({
-		size: 20,
+		size: 30,
 		params: '',
 		area: '',
 		category: '',
 		year: '',
 		subtitles: '',
 		order: 'up',
-		sort: '',
 	})
-	console.log(searchPayload)
 
 	useEffect(async () => {
 		const fetchCategories = await getSearchCategories()
@@ -73,13 +71,17 @@ const Explore = () => {
 		setSearchPayload({ ...searchPayload, [cate]: payload })
 	}
 
+	const handleLoadMoreContent = () => {
+		setSearchPayload((prevSearchPayload) => ({ ...prevSearchPayload, size: prevSearchPayload.size + 30 }))
+		console.log(searchPayload)
+	}
+
 	return (
 		<div className={expContainer}>
 			<Navbar />
 			<div className={expMain}>
 				<div className={expMainCategory}>
 					{categories.map((category) => {
-						// console.log(category)
 						return (
 							<CategoryTitle
 								key={category.id}
@@ -92,12 +94,13 @@ const Explore = () => {
 				</div>
 				<div className={expDetailsCategory}>
 					{detailsCate.map((category) => {
-						return <SelectBox key={category.name} category={category} />
+						return <SelectBox key={category.name} category={category} onSearchPayloadChange={onSearchPayloadChange} />
 					})}
 				</div>
-				<InfiniteScroll
+				{exploreContent.length !== 0 ? (
+					<InfiniteScroll
 					dataLength={exploreContent.length}
-					// next={() => setPage((prev) => prev + 1)}
+					next={handleLoadMoreContent}
 					hasMore={true}
 					loader={<h4>Loading...</h4>}
 					endMessage={
@@ -130,6 +133,10 @@ const Explore = () => {
 						})}
 					</div>
 				</InfiniteScroll>
+				) : (
+					<h4>Nothing to see.</h4>
+				)}
+				
 			</div>
 		</div>
 	)
