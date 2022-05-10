@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import styles from './Explore.module.css'
 
-import { Navbar, ScrollToTop, SelectBox } from '../../components'
+import { Navbar, ScrollToTop, SelectBox, CategoryTitle } from '../../components'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { getSearchCategories, getExploreContent } from '../../api'
@@ -26,8 +26,6 @@ const Explore = () => {
 	const [currentCate, setCurrentCate] = useState('')
 	const [detailsCate, setDetailsCate] = useState([])
 
-	const [isLoading, setisLoading] = useState(true)
-
 	const [exploreContent, setExploreContent] = useState([])
 	const [searchPayload, setSearchPayload] = useState({
 		size: 20,
@@ -48,7 +46,6 @@ const Explore = () => {
 			setCurrentCate(defaultCate.name)
 			setDetailsCate(defaultCate.screeningItems)
 			setSearchPayload({ ...searchPayload, params: defaultCate.params })
-			setisLoading(false)
 		}
 
 		const fetchExploreContent = await getExploreContent(searchPayload)
@@ -61,25 +58,18 @@ const Explore = () => {
 		setCurrentCate(categoryName)
 	}
 
+	const onSearchPayloadChange = (cate, payload) => {
+
+	}
+
 	return (
 		<div className={expContainer}>
 			<Navbar />
 			<div className={expMain}>
 				<div className={expMainCategory}>
 					{categories.map((category) => {
-						const { name, id } = category
-						let isActive = false
-
-						if (name === currentCate) isActive = true
-
 						return (
-							<div
-								key={id}
-								className={`${cateName} ${isActive && cateActive}`}
-								onClick={() => handleCategoryClick(name)}
-							>
-								{name}
-							</div>
+							<CategoryTitle key={category.id} category={category} handleCategoryClick={handleCategoryClick} currentCate={currentCate} />
 						)
 					})}
 				</div>
