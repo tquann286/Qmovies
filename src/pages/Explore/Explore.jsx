@@ -37,6 +37,7 @@ const Explore = () => {
 		order: 'up',
 		sort: '',
 	})
+	console.log(searchPayload)
 
 	useEffect(async () => {
 		const fetchCategories = await getSearchCategories()
@@ -54,12 +55,22 @@ const Explore = () => {
 		}
 	}, [])
 
-	const handleCategoryClick = (categoryName) => {
-		setCurrentCate(categoryName)
+	useEffect(async () => {
+		const fetchExploreContent = await getExploreContent(searchPayload)
+		if (fetchExploreContent) {
+			setExploreContent(fetchExploreContent.searchResults)
+		}
+	}, [searchPayload])
+
+	const handleCategoryClick = (categoryName, params) => {
+		if (currentCate !== categoryName) {
+			setCurrentCate(categoryName)
+			onSearchPayloadChange('params', params)
+		}
 	}
 
 	const onSearchPayloadChange = (cate, payload) => {
-
+		setSearchPayload({ ...searchPayload, [cate]: payload })
 	}
 
 	return (
@@ -68,8 +79,14 @@ const Explore = () => {
 			<div className={expMain}>
 				<div className={expMainCategory}>
 					{categories.map((category) => {
+						// console.log(category)
 						return (
-							<CategoryTitle key={category.id} category={category} handleCategoryClick={handleCategoryClick} currentCate={currentCate} />
+							<CategoryTitle
+								key={category.id}
+								category={category}
+								handleCategoryClick={() => handleCategoryClick(category.name, category.params)}
+								currentCate={currentCate}
+							/>
 						)
 					})}
 				</div>
@@ -78,43 +95,44 @@ const Explore = () => {
 						return <SelectBox key={category.name} category={category} />
 					})}
 				</div>
-					<InfiniteScroll
-						dataLength={exploreContent.length}
-						// next={() => setPage((prev) => prev + 1)}
-						hasMore={true}
-						loader={<h4>Loading...</h4>}
-						endMessage={
-							<p style={{ textAlign: 'center' }}>
-								<b>Yay! You have seen it all</b>
-							</p>
-						}
-					>
+				<InfiniteScroll
+					dataLength={exploreContent.length}
+					// next={() => setPage((prev) => prev + 1)}
+					hasMore={true}
+					loader={<h4>Loading...</h4>}
+					endMessage={
+						<p style={{ textAlign: 'center' }}>
+							<b>Yay! You have seen it all</b>
+						</p>
+					}
+				>
 					<div className={expInfScrollContent}>
-					{exploreContent.map(content => {
-						console.log(content);
-
-						return (
-							<Link key={content.id} to={content.domainType === 0 ? `/movie/${content.id}`: `/drama/${content.id}`} >
-					<div className={contentContainer}>
-							<div className={contentImg}>
-								<img
-									src={content.coverVerticalUrl}
-									alt={content.name}
-								/>
-							</div>
-							<div className={contentTitle}>
-								<h6>{content.name}</h6>
-							</div>
+						{exploreContent.map((content) => {
+							return (
+								<Link
+									key={content.id}
+									to={
+										content.domainType === 0
+											? `/movie/${content.id}`
+											: `/drama/${content.id}`
+									}
+								>
+									<div className={contentContainer}>
+										<div className={contentImg}>
+											<img src={content.coverVerticalUrl} alt={content.name} />
+										</div>
+										<div className={contentTitle}>
+											<h6>{content.name}</h6>
+										</div>
+									</div>
+								</Link>
+							)
+						})}
 					</div>
-					</Link>
-						)
-					})}
-					</div>
-					</InfiniteScroll>
-				</div>
+				</InfiniteScroll>
+			</div>
 		</div>
 	)
 }
 
 export default Explore
-
