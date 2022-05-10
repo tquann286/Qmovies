@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 import styles from './Navbar.module.css'
 import NavLogoIcon from '../../images/q-icon.svg'
-import { AiOutlineHome } from 'react-icons/ai'
-import { RiCompassDiscoverLine } from 'react-icons/ri'
-import { FaWpexplorer, FaHistory, FaSignInAlt } from 'react-icons/fa'
+import { FaSignInAlt } from 'react-icons/fa'
+
+import { navbarMenuData, onScrollToTop } from '../../utilities'
 
 const Navbar = () => {
 	const {
@@ -21,32 +21,7 @@ const Navbar = () => {
 		navIcon,
 	} = styles
 
-	const navbarMenuData = [
-		{
-			title: 'Home',
-			direction: '/',
-			icon: <AiOutlineHome className={navIcon} />
-		},
-		{
-			title: 'Explore',
-			direction: '/explore',
-			icon: <RiCompassDiscoverLine className={navIcon} />
-		},
-		{
-			title: 'Discovery',
-			direction: '/discovery',
-			icon: <FaWpexplorer className={navIcon} />
-		},
-		{
-			title: 'History',
-			direction: '/History',
-			icon: <FaHistory className={navIcon} style={{ fontSize: '27px' }} />
-		},
-	]
-
 	const [isScrolled, setIsScrolled ] = useState(false)
-
-	const onScrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 	useEffect(() => {
 		const changeBgColor = () => {

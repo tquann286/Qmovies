@@ -2,6 +2,8 @@ import React, { useState, useEffect, memo } from 'react'
 import { useWindowScroll } from 'react-use'
 import { IoIosArrowDropupCircle } from 'react-icons/io'
 
+import { onScrollToTop } from '../../utilities'
+
 import styles from './ScrollToTop.module.css'
 
 const ScrollToTop = () => {
@@ -17,8 +19,6 @@ const ScrollToTop = () => {
 			setVisiblity(false)
 		}
 	}, [pageYOffset])
-
-	const onScrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 	return (
 		<div className={`${sttContainer} ${visible && showScrollToTop}`}>
