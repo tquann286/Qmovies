@@ -1,0 +1,70 @@
+.expContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.expMain {
+	width: 90%;
+	/* background-color: #474747; */
+	height: 1500px;
+	margin-top: 72px;
+}
+
+.expMainCategory {
+	display: flex;
+  height: 32px;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 120%;
+	letter-spacing: 0.2px;
+}
+
+.expDetailsCategory {
+	display: flex;
+	margin: 12px 0;
+	font-size: 15px;
+}
+
+.expInfScrollContent {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.expInfScrollContent a {
+	width: 15%;
+	margin: auto;
+	height: 300px;
+}
+
+.contentContainer {
+	transition: 0.05s;
+}
+
+.contentContainer:hover {
+	color: #8a8ef6;
+}
+
+.contentImg {
+	display: inline-block;
+}
+
+.contentImg img {
+	max-width: 100%;
+  height: auto;
+	border-radius: 8px;
+}
+
+.contentTitle {
+	width: 100%;
+	margin-top: 4px;
+}
+
+.contentTitle h6 {
+	font-size: 14px;
+	line-height: 120%;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	-ms-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}

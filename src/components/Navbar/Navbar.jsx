@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect, memo } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 import styles from './Navbar.module.css'
 import NavLogoIcon from '../../images/q-icon.svg'
-import { AiOutlineHome } from 'react-icons/ai'
-import { RiCompassDiscoverLine } from 'react-icons/ri'
-import { FaWpexplorer, FaHistory, FaSignInAlt } from 'react-icons/fa'
+import { FaSignInAlt } from 'react-icons/fa'
+
+import { navbarMenuData, onScrollToTop } from '../../utilities'
 
 const Navbar = () => {
 	const {
@@ -21,11 +21,16 @@ const Navbar = () => {
 		navIcon,
 	} = styles
 
-	const [isScrolled, setIsScrolled ] = useState(false)
+	const location = useLocation()
+	const [isScrolled, setIsScrolled] = useState(false)
 
 	useEffect(() => {
+		const { scrollBgChangeHeight = 120 } = navbarMenuData.filter(
+			(data) => location.pathname === data.direction
+		)[0]
+		// nếu lỗi thì so xem tồn tại scrollBgChangeHeight không nếu không thì cho nó bằng 120
 		const changeBgColor = () => {
-			if (window.scrollY >= 536) {
+			if (window.scrollY >= scrollBgChangeHeight) {
 				setIsScrolled(true)
 			} else {
 				setIsScrolled(false)
@@ -33,37 +38,34 @@ const Navbar = () => {
 		}
 
 		window.addEventListener('scroll', changeBgColor)
-	}, [])
 
-	
+		return () => {
+			window.removeEventListener('scroll', changeBgColor)
+		}
+	}, [])
 
 	return (
 		<div className={`${navContainer} ${isScrolled && navContainerScrolled}`}>
 			<div className={navLogo}>
-				<Link to='/'>
+				<Link to='/' onClick={onScrollToTop}>
 					<img className={navLogoIcon} src={NavLogoIcon} alt='' />
 				</Link>
-				<Link to='/'>
+				<Link to='/' onClick={onScrollToTop}>
 					<span className={`${navText} ${gradientText}`}>movies</span>
 				</Link>
 			</div>
 			<ul className={navMain}>
-				<Link className={navLink} to='/'>
-					<AiOutlineHome className={navIcon} />
-					<span style={{ marginTop: '5px' }}>Home</span>
-				</Link>
-				<Link className={navLink} to='/discovery'>
-					<RiCompassDiscoverLine className={navIcon} />
-					<span>Discovery</span>
-				</Link>
-				<Link className={navLink} to='/explore'>
-					<FaWpexplorer className={navIcon} />
-					<span>Explore</span>
-				</Link>
-				<Link className={navLink} to='/history'>
-					<FaHistory className={navIcon} style={{ fontSize: '27px' }} />
-					<span>History</span>
-				</Link>
+				{navbarMenuData.map((data) => (
+					<Link
+						key={data.title}
+						className={navLink}
+						to={data.direction}
+						onClick={onScrollToTop}
+					>
+						{data.icon}
+						<span>{data.title}</span>
+					</Link>
+				))}
 			</ul>
 			<div className={navUser}>
 				<Link className={navLink} to='/auth'>
@@ -75,4 +77,4 @@ const Navbar = () => {
 	)
 }
 
-export default Navbar
+export default memo(Navbar)

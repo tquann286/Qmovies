@@ -3,105 +3,153 @@ import { Link } from 'react-router-dom'
 
 import styles from './Explore.module.css'
 
-import { Navbar } from '../../components'
+import { Navbar, ScrollToTop, SelectBox, CategoryTitle } from '../../components'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { FaHeart } from 'react-icons/fa'
-import { MdOutlineOpenInNew } from 'react-icons/md'
 
-const Discovery = () => {
+import { getSearchCategories, getExploreContent } from '../../api'
+
+const Explore = () => {
 	const {
-		disContainer,
-		postContainer,
-		postUpImage,
-		postUpName,
-		postImageSection,
-		postContentSection,
-		postCaption,
-		postReact,
-		postVideoContainer,
-		postVideo,
-		postLikeCount,
-		postWatchNow,
-		postHeartIcon,
-		postOpenIcon,
-		reactContainer
+		expContainer,
+		expMain,
+		expMainCategory,
+		expDetailsCategory,
+		expInfScrollContent,
+		contentContainer,
+		contentTitle,
+		contentImg,
 	} = styles
 
-	const [dicoveryVideos, setDicoveryVideos] = useState([])
-	const [page, setPage] = useState(0)
+	const [categories, setCategories] = useState([])
+	const [currentCate, setCurrentCate] = useState('')
+	const [detailsCate, setDetailsCate] = useState([])
 
-	useEffect(() => {
-		getDiscoveryVideos(page).then((res) => {
-			setDicoveryVideos(dicoveryVideos.concat(res))
-		})
-	}, [page])
+	const [isLoading, setIsLoading] = useState(true)
+
+	const [exploreContent, setExploreContent] = useState([])
+	const [searchPayload, setSearchPayload] = useState({
+		size: 30,
+		params: '',
+		area: '',
+		category: '',
+		year: '',
+		subtitles: '',
+		order: 'up',
+	})
+
+	useEffect(async () => {
+		const fetchCategories = await getSearchCategories()
+		if (fetchCategories) {
+			const defaultCate = fetchCategories[0]
+			setCategories(fetchCategories)
+			setCurrentCate(defaultCate.name)
+			setDetailsCate(defaultCate.screeningItems)
+			setSearchPayload({ ...searchPayload, params: defaultCate.params })
+		}
+
+		setIsLoading(false)
+	}, [])
+
+	useEffect(async () => {
+		const fetchExploreContent = await getExploreContent(searchPayload)
+		if (fetchExploreContent) {
+			setExploreContent(fetchExploreContent.searchResults)
+		}
+	}, [searchPayload])
+
+	const handleCategoryClick = (categoryName, params) => {
+		if (currentCate !== categoryName) {
+			setCurrentCate(categoryName)
+			onSearchPayloadChange('params', params)
+		}
+	}
+
+	const onSearchPayloadChange = (cate, payload) => {
+		setSearchPayload({ ...searchPayload, [cate]: payload })
+	}
+
+	const handleLoadMoreContent = () => {
+		setSearchPayload((prevSearchPayload) => ({
+			...prevSearchPayload,
+			size: prevSearchPayload.size + 30,
+		}))
+	}
 
 	return (
-		<React.Fragment>
+		<div className={expContainer}>
 			<Navbar />
-			<div className={disContainer}>
-				<InfiniteScroll
-					dataLength={dicoveryVideos.length}
-					next={() => setPage((prev) => prev + 1)}
-					hasMore={true}
-					loader={<h4>Loading...</h4>}
-					endMessage={
-						<p style={{ textAlign: 'center' }}>
-							<b>Yay! You have seen it all</b>
-						</p>
-					}
-				>
-					{dicoveryVideos.map((post) => (
-						<div key={post.id} className={postContainer}>
-							<div className={postImageSection}>
-								<img
-									className={postUpImage}
-									src={post.upInfo.upImgUrl || noImage}
-									alt={post.upInfo.upName}
-									effect='opacity'
-								/>
-							</div>
-							<div className={postContentSection}>
-								<p className={postUpName}>{post.upInfo.upName}</p>
-								<p className={postCaption}>{post.introduction}</p>
-								<div className={postVideoContainer}>
-									<InView threshold={0.5}>
-										{({ inView, ref }) => (
-											<div ref={ref}>
-												<HlsPlayer
-													className={postVideo}
-													controls
-													autoPlay={inView}
-													playsInline
-													src={post.mediaUrl}
+			<div className={expMain}>
+				<div className={expMainCategory}>
+					{categories.map((category) => {
+						return (
+							<CategoryTitle
+								key={category.id}
+								category={category}
+								handleCategoryClick={() =>
+									handleCategoryClick(category.name, category.params)
+								}
+								currentCate={currentCate}
+							/>
+						)
+					})}
+				</div>
+				<div className={expDetailsCategory}>
+					{detailsCate.map((category) => {
+						return (
+							<SelectBox
+								key={category.name}
+								category={category}
+								onSearchPayloadChange={onSearchPayloadChange}
+							/>
+						)
+					})}
+				</div>
+				{!isLoading ? (
+					<InfiniteScroll
+						dataLength={exploreContent.length}
+						next={handleLoadMoreContent}
+						hasMore={!isLoading && exploreContent.length !== 0}
+						loader={<h4>Loading...</h4>}
+						endMessage={
+							<p style={{ textAlign: 'center' }}>
+								<b>Yay! You have seen it all</b>
+							</p>
+						}
+					>
+						<div className={expInfScrollContent}>
+							{exploreContent.map((content) => {
+								return (
+									<Link
+										key={content.id}
+										to={
+											content.domainType === 0
+												? `/movie/${content.id}`
+												: `/drama/${content.id}`
+										}
+									>
+										<div className={contentContainer}>
+											<div className={contentImg}>
+												<img
+													src={content.coverVerticalUrl}
+													alt={content.name}
 												/>
 											</div>
-										)}
-									</InView>
-								</div>
-							</div>
-							<div className={postReact}>
-								<div className={reactContainer}>
-									<div className={postLikeCount}>
-										<FaHeart className={postHeartIcon} />
-										<p>{post.likeCount}</p>
-									</div>
-									<Link to={
-										post.refList[0]?.category === 0
-											? `/movie/${post.refList[0]?.id}`
-											: `/tv/${post.refList[0]?.id}`
-									} className={postWatchNow}>
-										<MdOutlineOpenInNew className={postOpenIcon} />
-										<p>Watch</p>
+											<div className={contentTitle}>
+												<h6>{content.name}</h6>
+											</div>
+										</div>
 									</Link>
-								</div>
-							</div>
+								)
+							})}
 						</div>
-					))}
-				</InfiniteScroll>
+					</InfiniteScroll>
+				) : (
+					<h4>Loading...</h4>
+				)}
 			</div>
-		</React.Fragment>
+			<ScrollToTop />
+		</div>
 	)
 }
 
-export default Discovery
+export default Explore

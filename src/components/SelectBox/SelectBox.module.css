@@ -1,0 +1,89 @@
+.selectBox {
+  display: flex;
+  width: 180px;
+  flex-direction: column;
+  margin-right: 12px;
+}
+
+.selectBox .optionsContainer {
+  background: #2f3640;
+  color: #f5f6fa;
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+  order: 1;
+}
+
+.selected {
+  width: 100%;
+  background: #2f3640;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  color: #f5f6fa;
+  position: relative;
+  order: 0;
+}
+
+.titleText {
+  display: inline-block;
+  width: 89%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 2px 0;
+}
+
+.selectBox .optionsContainer.active {
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.selectBox .optionsContainer::-webkit-scrollbar {
+  width: 8px;
+  background: #0d141f;
+  border-radius: 0 8px 8px 0;
+}
+
+.selectBox .optionsContainer::-webkit-scrollbar-track {
+  width: 8px;
+  border-radius: 0 8px 8px 0;
+}
+
+.selectBox .optionsContainer::-webkit-scrollbar-thumb {
+  background: #525861;
+  border-radius: 0 8px 8px 0;
+}
+
+.selectBox .option,
+.selected {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.selectBox .option:hover {
+  background: #414b57;
+}
+
+.selectBox label {
+  cursor: pointer;
+}
+
+.selectBox .option .radio {
+  display: none;
+}
+
+.arrowDownIcon {
+  display: inline-block;
+  float: right;
+  font-size: 14px;
+  padding: 2px 0;
+  transition: 0.2s;
+}
+
+.arrowDownIcon.active {
+  transform: rotate(180deg) translateY(1px);
+}
