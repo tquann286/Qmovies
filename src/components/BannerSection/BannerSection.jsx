@@ -43,7 +43,7 @@ const BannerSection = ({ bannerMovies }) => {
 				if (searchParams.get('type') === '0') {
 					movieAddress = `/movie/${movie.id}`
 				} else {
-					movieAddress = `/drama/${movie.id}`
+					movieAddress = `/series/${movie.id}`
 				}
 
 				return (

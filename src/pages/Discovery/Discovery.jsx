@@ -94,7 +94,7 @@ const Discovery = () => {
 									<Link to={
 										post.refList[0]?.category === 0
 											? `/movie/${post.refList[0]?.id}`
-											: `/drama/${post.refList[0]?.id}`
+											: `/series/${post.refList[0]?.id}`
 									} className={postWatchNow}>
 										<MdOutlineOpenInNew className={postOpenIcon} />
 										<p>Watch</p>

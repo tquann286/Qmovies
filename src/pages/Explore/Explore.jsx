@@ -124,7 +124,7 @@ const Explore = () => {
 										to={
 											content.domainType === 0
 												? `/movie/${content.id}`
-												: `/drama/${content.id}`
+												: `/series/${content.id}`
 										}
 									>
 										<div className={contentContainer}>
