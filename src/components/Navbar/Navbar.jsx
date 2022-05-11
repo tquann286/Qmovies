@@ -25,10 +25,12 @@ const Navbar = () => {
 	const [isScrolled, setIsScrolled] = useState(false)
 
 	useEffect(() => {
-		const { scrollBgChangeHeight = 120 } = navbarMenuData.filter(
+		const { scrollBgChangeHeight } = navbarMenuData.filter(
 			(data) => location.pathname === data.direction
 		)[0]
-		// nếu lỗi thì so xem tồn tại scrollBgChangeHeight không nếu không thì cho nó bằng 120
+		
+		if (!scrollBgChangeHeight) scrollBgChangeHeight = 120
+		
 		const changeBgColor = () => {
 			if (window.scrollY >= scrollBgChangeHeight) {
 				setIsScrolled(true)
