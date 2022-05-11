@@ -51,3 +51,11 @@ export const getExploreContent = async (searchQuery) => {
 	
 	return data 
 }
+
+export const getMovieDetail = async (movieId, movieType) => {
+	const data = (await API.get(`/movieDrama/get?id=${movieId}&category=${movieType}`)).data
+
+	console.log(data)
+	
+	return data
+}

@@ -3,17 +3,20 @@ import { Link, useParams } from 'react-router-dom'
 
 import styles from './Movie.module.css'
 
-import { getDiscoveryVideos } from '../../api'
+import { getMovieDetail } from '../../api'
 
 import { Navbar, ScrollToTop } from '../../components'
 
 const Movie = () => {
-	const {
-		movieContainer,
-	} = styles
+	const { movieContainer } = styles
 
 	const params = useParams()
-	console.log(params)
+
+	useEffect(async () => {
+		const fetchData = await getMovieDetail(params.movieId, 0)
+
+
+	}, [])
 
 	return (
 		<div className={movieContainer}>
