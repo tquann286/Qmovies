@@ -8,6 +8,7 @@ import styles from './Movie.module.css'
 import { getMovieDetail, getMoviePreviewInfo } from '../../api'
 
 import { Navbar, ScrollToTop } from '../../components'
+import { subtitleProxy } from '../../utilities'
 
 const Movie = () => {
 	const {
@@ -22,7 +23,7 @@ const Movie = () => {
 
 	const [movie, setMovie] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
-	console.log(movie)
+	console.log(movie?.subtitlesInfo)
 
 	const params = useParams()
 
@@ -30,7 +31,7 @@ const Movie = () => {
 		const fetchData = await getMovieDetail(params.movieId, 0)
 
 		if (fetchData) {
-			const episodeInfo = await Promise.all(
+			const sourceInfo = await Promise.all(
 				fetchData.episodeVo[0].definitionList.map(async (item) => {
 					const fetchEpisodeInfo = await getMoviePreviewInfo(
 						params.movieId,
@@ -38,12 +39,30 @@ const Movie = () => {
 						fetchData.episodeVo[0].id,
 						item.code
 					)
+					fetchEpisodeInfo.definition = item.description.replace('P', '')
 
-					return fetchEpisodeInfo
+					return {
+						quality: fetchEpisodeInfo.definition,
+						url: fetchEpisodeInfo.mediaUrl,
+					}
 				})
 			)
 
-			setMovie({ ...fetchData, episodeInfo: episodeInfo })
+			const subtitlesInfo = await Promise.all(
+				fetchData.episodeVo[0].subtitlingList.map(async (subtitle) => ({
+					lang: subtitle.languageAbbr,
+					language: `${subtitle.language} ${
+						subtitle.translateType ? '(Auto)' : ''
+					}`,
+					url: subtitle.subtitlingUrl,
+				}))
+			)
+
+			setMovie({
+				...fetchData,
+				sourceInfo: sourceInfo.sort((a, b) => b.quality - a.quality),
+				subtitlesInfo: subtitlesInfo,
+			})
 		}
 
 		setIsLoading(false)
@@ -60,7 +79,14 @@ const Movie = () => {
 				<div className={movieMain}>
 					<div className={movieSection}>
 						<div className={videoSection}>
-							
+							<Player
+								src={movie.sourceInfo}
+								subtitles={movie.subtitlesInfo.map((subtitle) => ({
+									...subtitle,
+									url: subtitleProxy(subtitle.url),
+								}))}
+								poster={movie.coverVerticalUrl}
+							/>
 						</div>
 						<div className={relativeSection}>
 							<div className={sameSeriesSection}></div>
