@@ -5,7 +5,7 @@ import 'react-tuby/css/main.css'
 
 import styles from './Movie.module.css'
 
-import { getMovieDetail } from '../../api'
+import { getMovieDetail, getMoviePreviewInfo } from '../../api'
 
 import { Navbar, ScrollToTop } from '../../components'
 
@@ -21,29 +21,54 @@ const Movie = () => {
 	} = styles
 
 	const [movie, setMovie] = useState(null)
+	const [isLoading, setIsLoading] = useState(true)
 	console.log(movie)
+
 	const params = useParams()
 
 	useEffect(async () => {
 		const fetchData = await getMovieDetail(params.movieId, 0)
 
 		if (fetchData) {
-			setMovie(fetchData)
+			const episodeInfo = await Promise.all(
+				fetchData.episodeVo[0].definitionList.map(async (item) => {
+					const fetchEpisodeInfo = await getMoviePreviewInfo(
+						params.movieId,
+						0,
+						fetchData.episodeVo[0].id,
+						item.code
+					)
+
+					return fetchEpisodeInfo
+				})
+			)
+
+			setMovie({ ...fetchData, episodeInfo: episodeInfo })
 		}
+
+		setIsLoading(false)
 	}, [])
 
 	return (
 		<div className={movieContainer}>
 			<Navbar />
-			<div className={movieMain}>
-				<div className={movieSection}>
-					<div className={videoSection}></div>
-					<div className={relativeSection}>
-						<div className={sameSeriesSection}></div>
-						<div className={relativeSeriesSection}></div>
+			{isLoading ? (
+				<div className={movieMain}>
+					<h4>Loading...</h4>
+				</div>
+			) : (
+				<div className={movieMain}>
+					<div className={movieSection}>
+						<div className={videoSection}>
+							
+						</div>
+						<div className={relativeSection}>
+							<div className={sameSeriesSection}></div>
+							<div className={relativeSeriesSection}></div>
+						</div>
 					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	)
 }
