@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import './index.css'
 import styles from './BannerSection.module.css'
+import { detectMovieLink } from '../../utilities'
 
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
@@ -30,25 +31,13 @@ const BannerSection = ({ bannerMovies }) => {
 			pagination={{ clickable: true }}
 		>
 			{bannerMovies.map((movie) => {
-				let movieAddress
-
-				const searchParams = new URLSearchParams(
-					new URL(movie.jumpAddress).search
-				)
-
-				if (!searchParams.get('id')) {
+				if (!detectMovieLink(movie)) {
 					return null
-				}
-
-				if (searchParams.get('type') === '0') {
-					movieAddress = `/movie/${movie.id}`
-				} else {
-					movieAddress = `/series/${movie.id}`
 				}
 
 				return (
 					<SwiperSlide key={movie.id}>
-						<Link className={movieSlide} to={movieAddress}>
+						<Link className={movieSlide} to={detectMovieLink(movie)}>
 							{movie.title && <h2 className={movieName}>{movie.title}</h2>}
 							<LazyLoadImage
 								className={movieImage}

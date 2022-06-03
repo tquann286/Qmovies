@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './SectionSlider.module.css'
+import { detectMovieLink } from '../../utilities'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -24,11 +25,13 @@ const SectionSlider = ({ movies }) => {
 				loop
 			>
 				{movies.recommendContentVOList.map((movie) => {
-					const contentType = movie.contentType.toLowerCase()
+					if (!detectMovieLink(movie)) {
+						return null
+					}
 
 					return (
 						<SwiperSlide key={movie.id}>
-							<Link to={`/${contentType}/${movie.id}`}>
+							<Link to={detectMovieLink(movie)}>
 								<LazyLoadImage
 									className={movieImage}
 									src={movie.imageUrl}
