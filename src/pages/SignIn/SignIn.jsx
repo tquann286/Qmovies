@@ -4,14 +4,19 @@ import { Link } from 'react-router-dom'
 import styles from './SignIn.module.css'
 
 const SignIn = () => {
-	const {
-		disContainer,
-	} = styles
+	const { container, main } = styles
 
 	return (
-		<React.Fragment>
-			helo
-		</React.Fragment>
+		<div className={container}>
+			<div className={main}>
+				<svg xmlns='http://www.w3.org/2000/svg'>
+					<filter id='motion-blur-filter' filterUnits='userSpaceOnUse'>
+						<feGaussianBlur stdDeviation='100 0'></feGaussianBlur>
+					</filter>
+				</svg>
+				<span filter-content='S'>Sign In</span>
+			</div>
+		</div>
 	)
 }
 
