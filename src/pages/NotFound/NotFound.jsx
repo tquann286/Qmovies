@@ -1,15 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import styles from './NotFound.module.css'
+import './NotFound.css'
 
 const NotFound = () => {
-	const {
-		NotFoundContainer,
-	} = styles
 
 	return (
-		<div>Not Found</div>
+		<div id="notfound">
+		<div className="notfound">
+			<div className="notfound-404">
+				<h1>404</h1>
+				<h2>Page not found</h2>
+			</div>
+			<Link to='/'>Homepage</Link>
+		</div>
+	</div>
 	)
 }
 
