@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import { Home, Discovery, Explore, Movie, SignIn } from './pages'
+import { Home, Discovery, Explore, Movie, SignIn, NotFound } from './pages'
 
 const App = () => {
 	return (
@@ -12,6 +12,7 @@ const App = () => {
 				<Route path='/explore' element={<Explore />} />
 				<Route path='/movie/:movieId' element={<Movie />} />
 				<Route path='/auth' element={<SignIn />} />
+				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>
 	)

@@ -1,0 +1,35 @@
+.movieMain {
+	width: 100%;
+	height: 1200px;
+	margin-top: 64px;
+}
+
+.movieSection {
+	display: flex;
+	width: 90%;
+	height: 538px;
+	margin: 16px auto;
+}
+
+.videoSection {
+	width: 72%;
+	height: 90%;
+	margin: auto 0;
+}
+
+.relativeSection {
+	width: 30%;
+	height: 100%;
+	padding: 26px;
+	padding-left: 32px;
+}
+
+.inSeriesSection {
+	width: 100%;
+	height: 50%;
+}
+
+.relativeSeriesSection {
+	width: 100%;
+	height: 50%;
+}
