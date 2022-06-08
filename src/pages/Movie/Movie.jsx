@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Player } from 'react-tuby'
 import 'react-tuby/css/main.css'
@@ -26,6 +26,8 @@ const Movie = () => {
 	const [movie, setMovie] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 	const params = useParams()
+
+	const movieRef = useRef()
 
 	useEffect(async () => {
 		const fetchData = await getMovieDetail(params.movieId, 0)
@@ -68,6 +70,10 @@ const Movie = () => {
 		setIsLoading(false)
 	}, [])
 
+	useEffect(() => {
+		movieRef.current.scrollIntoView({ behavior: 'smooth' })
+	}, []);
+
 	return (
 		<div className={movieContainer}>
 			<Navbar />
@@ -77,7 +83,7 @@ const Movie = () => {
 				</div>
 			) : (
 				<div className={movieMain}>
-					<div className={movieSection}>
+					<div className={movieSection} ref={movieRef}>
 						<div className={videoSection}>
 							<Player
 								src={movie.sourceInfo}
