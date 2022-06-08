@@ -30,7 +30,7 @@ export const getDiscoveryVideos = async (page = 0) => {
 				category: item.category,
 				contentId: item.id,
 				episodeId: item.mediaInfo.id,
-				definition: item.mediaInfo.definitionList.slice(-1)[0].code,
+				definition: item.mediaInfo.definitionList.slice(-1)[0]?.code,
 			}))
 		)
 	).data.data.map((item) => item.mediaUrl)

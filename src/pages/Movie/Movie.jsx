@@ -71,7 +71,7 @@ const Movie = () => {
 	}, [])
 
 	useEffect(() => {
-		movieRef.current.scrollIntoView({ behavior: 'smooth' })
+		movieRef?.current.scrollIntoView({ behavior: 'smooth' })
 	}, []);
 
 	return (
