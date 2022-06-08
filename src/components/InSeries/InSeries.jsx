@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import styles from './InSeries.module.css'
 
 const InSeries = ({ refList }) => {
-	const { inSeriesContainer, movieMain, coverImage } = styles
+	const { inSeriesContainer, refMain, movieMain, coverImage } = styles
 
 	const detectLink = ({ category, id }) => {
 		if (category) {
@@ -17,19 +17,18 @@ const InSeries = ({ refList }) => {
 	return (
 		<div className={inSeriesContainer}>
 			<h6>Related Series</h6>
-			{refList?.map((refMovie) => {
-				console.log(refMovie)
-				return (
-					<Link key={refMovie.id} to={detectLink(refMovie)}>
-						<div className={movieMain}>
-							<div className={coverImage}>
-								<img src={refMovie.coverVerticalUrl} alt={refMovie.name} />
-							</div>
-							<span>{refMovie.name}</span>
+			<div className={refMain}>
+			{refList?.map((refMovie) => (
+				<Link key={refMovie.id} to={detectLink(refMovie)}>
+					<div className={movieMain}>
+						<div className={coverImage}>
+							<img src={refMovie.coverVerticalUrl} alt={refMovie.name} />
 						</div>
-					</Link>
-				)
-			})}
+						<span>{refMovie.name}</span>
+					</div>
+				</Link>
+			))}
+			</div>
 		</div>
 	)
 }

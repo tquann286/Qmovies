@@ -1,0 +1,50 @@
+.similarContainer {
+	height: 100%;
+}
+
+.similarContainer > h6 {
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 120%;
+	color: #999;
+	margin: 10px;
+}
+
+.similarMain {
+	height: 87%;
+	overflow: auto;
+}
+
+a:not(:last-child) > .movieMain {
+	margin-bottom: 10px;
+}
+
+.movieMain {
+  display: flex;
+}
+
+.movieMain span {
+	width: 70%;
+	font-size: 15px;
+	font-weight: bold;
+	word-break: break-word;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	-ms-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+  letter-spacing: 0.15px;
+  margin: 15px 15px;
+}
+
+.coverImage {
+	display: inline-block;
+	width: 30%;
+}
+
+.coverImage img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 4px;
+}

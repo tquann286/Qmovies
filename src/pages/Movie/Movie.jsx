@@ -8,7 +8,7 @@ import styles from './Movie.module.css'
 
 import { getMovieDetail, getMoviePreviewInfo } from '../../api'
 
-import { Navbar, ScrollToTop, Similar, InSeries } from '../../components'
+import { Navbar, ScrollToTop, InSeries, Similar } from '../../components'
 import { subtitleProxy } from '../../utilities'
 import {PROXY} from '../../shared/constants'
 
@@ -101,7 +101,9 @@ const Movie = () => {
 							<div className={inSeriesSection}>
 								<InSeries refList={movie.refList} />
 							</div>
-							<div className={relativeSeriesSection}></div>
+							<div className={relativeSeriesSection}>
+								<Similar similarList={movie.likeList} />
+							</div>
 						</div>
 					</div>
 				</div>
