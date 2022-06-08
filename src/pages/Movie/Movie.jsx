@@ -23,7 +23,7 @@ const Movie = () => {
 
 	const [movie, setMovie] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
-	console.log(movie?.subtitlesInfo)
+	console.log(movie)
 
 	const params = useParams()
 
