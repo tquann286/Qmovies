@@ -18,19 +18,16 @@ const Similar = ({ similarList }) => {
 		<div className={similarContainer}>
 			<h6>You may like</h6>
 			<div className={similarMain}>
-			{similarList?.map((similarMovie) => {
-				console.log(similarMovie)
-				return (
-					<Link key={similarMovie.id} to={detectLink(similarMovie)}>
-						<div className={movieMain}>
-							<div className={coverImage}>
-								<img src={similarMovie.coverVerticalUrl} alt={similarMovie.name} />
-							</div>
-							<span>{similarMovie.name}</span>
+			{similarList?.map((similarMovie) => (
+				<Link key={similarMovie.id} to={detectLink(similarMovie)}>
+					<div className={movieMain}>
+						<div className={coverImage}>
+							<img src={similarMovie.coverVerticalUrl} alt={similarMovie.name} />
 						</div>
-					</Link>
-				)
-			})}
+						<span>{similarMovie.name}</span>
+					</div>
+				</Link>
+			))}
 			</div>
 		</div>
 	)
