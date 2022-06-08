@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { PROXY } from '../shared/constants'
 
 const API = axios.create({
-	baseURL: 'https://ga-mobile-api.loklok.tv/cms/app',
+	baseURL: `${PROXY}https://ga-mobile-api.loklok.tv/cms/app`,
 	headers: {
 		lang: 'en',
 		versioncode: '11',
