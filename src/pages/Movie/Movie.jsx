@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Player } from 'react-tuby'
 import 'react-tuby/css/main.css'
+import HlsPlayer from 'react-hls-player'
 
 import styles from './Movie.module.css'
 
@@ -9,6 +10,7 @@ import { getMovieDetail, getMoviePreviewInfo } from '../../api'
 
 import { Navbar, ScrollToTop } from '../../components'
 import { subtitleProxy } from '../../utilities'
+import {PROXY} from '../../shared/constants'
 
 const Movie = () => {
 	const {
@@ -42,7 +44,7 @@ const Movie = () => {
 					fetchEpisodeInfo.definition = item.description.replace('P', '')
 
 					return {
-						quality: fetchEpisodeInfo.definition,
+						quality: Number(fetchEpisodeInfo.definition),
 						url: fetchEpisodeInfo.mediaUrl,
 					}
 				})
@@ -81,12 +83,20 @@ const Movie = () => {
 						<div className={videoSection}>
 							<Player
 								src={movie.sourceInfo}
-								subtitles={movie.subtitlesInfo.map((subtitle) => ({
+								subtitles={movie.subtitlesInfo?.map((subtitle) => ({
 									...subtitle,
 									url: subtitleProxy(subtitle.url),
-								}))}
+								})) || []}
 								poster={movie.coverVerticalUrl}
-							/>
+							>
+							{(ref, props) => (
+								<HlsPlayer
+									playerRef={ref}
+									{...props}
+									src={`${PROXY}${props.src}`}
+								/>
+							)}
+							</Player>
 						</div>
 						<div className={relativeSection}>
 							<div className={sameSeriesSection}></div>
