@@ -88,6 +88,7 @@ const Movie = () => {
 									url: subtitleProxy(subtitle.url),
 								})) || []}
 								poster={movie.coverVerticalUrl}
+								pictureInPicture={true}
 							>
 							{(ref, props) => (
 								<HlsPlayer
