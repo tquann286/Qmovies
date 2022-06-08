@@ -22,10 +22,11 @@
 .relativeSection {
 	width: 30%;
 	height: 100%;
-	background-color: #4d5475;
+	background-color: #6372b9;
+	padding: 26px;
 }
 
-.sameSeriesSection {
+.inSeriesSection {
 	width: 100%;
 	background-color: #4b5170;
 	height: 50%;

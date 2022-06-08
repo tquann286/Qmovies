@@ -8,7 +8,7 @@ import styles from './Movie.module.css'
 
 import { getMovieDetail, getMoviePreviewInfo } from '../../api'
 
-import { Navbar, ScrollToTop } from '../../components'
+import { Navbar, ScrollToTop, Similar, InSeries } from '../../components'
 import { subtitleProxy } from '../../utilities'
 import {PROXY} from '../../shared/constants'
 
@@ -19,14 +19,12 @@ const Movie = () => {
 		movieSection,
 		videoSection,
 		relativeSection,
-		sameSeriesSection,
+		inSeriesSection,
 		relativeSeriesSection,
 	} = styles
 
 	const [movie, setMovie] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
-	console.log(movie)
-
 	const params = useParams()
 
 	useEffect(async () => {
@@ -100,12 +98,15 @@ const Movie = () => {
 							</Player>
 						</div>
 						<div className={relativeSection}>
-							<div className={sameSeriesSection}></div>
+							<div className={inSeriesSection}>
+								<InSeries refList={movie.refList[0]} />
+							</div>
 							<div className={relativeSeriesSection}></div>
 						</div>
 					</div>
 				</div>
 			)}
+			<ScrollToTop />
 		</div>
 	)
 }
