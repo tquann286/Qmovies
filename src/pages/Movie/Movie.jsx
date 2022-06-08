@@ -99,7 +99,7 @@ const Movie = () => {
 						</div>
 						<div className={relativeSection}>
 							<div className={inSeriesSection}>
-								<InSeries refList={movie.refList[0]} />
+								<InSeries refList={movie.refList} />
 							</div>
 							<div className={relativeSeriesSection}></div>
 						</div>

@@ -24,16 +24,19 @@
 	height: 100%;
 	background-color: #6372b9;
 	padding: 26px;
+	padding-left: 32px;
 }
 
 .inSeriesSection {
 	width: 100%;
 	background-color: #4b5170;
 	height: 50%;
+	overflow: auto;
 }
 
 .relativeSeriesSection {
 	width: 100%;
 	background-color: #444444;
 	height: 50%;
+	overflow: auto;
 }
