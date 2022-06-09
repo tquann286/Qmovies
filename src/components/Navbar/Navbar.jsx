@@ -2,19 +2,14 @@ import React, { useState, useEffect, memo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import styles from './Navbar.module.css'
-import NavLogoIcon from '../../images/q-icon.svg'
 import { FaSignInAlt } from 'react-icons/fa'
-
+import { LogoIcon } from '../../components'
 import { navbarMenuData, onScrollToTop } from '../../utilities'
 
 const Navbar = () => {
 	const {
-		gradientText,
 		navContainer,
 		navContainerScrolled,
-		navLogo,
-		navText,
-		navLogoIcon,
 		navMain,
 		navUser,
 		navLink,
@@ -54,14 +49,7 @@ const Navbar = () => {
 
 	return (
 		<div className={`${navContainer} ${isScrolled && navContainerScrolled}`}>
-			<div className={navLogo}>
-				<Link to='/' onClick={onScrollToTop}>
-					<img className={navLogoIcon} src={NavLogoIcon} alt='' />
-				</Link>
-				<Link to='/' onClick={onScrollToTop}>
-					<span className={`${navText} ${gradientText}`}>movies</span>
-				</Link>
-			</div>
+			<LogoIcon />
 			<ul className={navMain}>
 				{navbarMenuData.map((data) => (
 					<Link

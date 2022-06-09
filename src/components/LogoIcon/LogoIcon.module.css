@@ -1,0 +1,24 @@
+.gradientText {
+	text-transform: uppercase;
+	background: linear-gradient(to right, #e22838 0%, #30cfd0 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.navLogo {
+	display: flex;
+	align-items: center;
+	-webkit-user-select: none;
+	user-select: none;
+	transform: scale(0.9);
+}
+
+.navLogoIcon {
+	width: 40px;
+	height: 40px;
+}
+
+.navText {
+	font-weight: bold;
+	font-size: 32px;
+}
