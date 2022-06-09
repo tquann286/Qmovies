@@ -4,12 +4,20 @@
 	justify-content: center;
 	align-items: center;
 	background-color: #20bf55;
-background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+	background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+}
 
+.logoIcon {
+	height: 15%;
+	margin-top: 30px;
+	transform: scale(1.1);
 }
 
 .main {
-	height: 70vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 60vh;
 	width: 350px;
 	background-color: rgb(43, 42, 42);
 	text-align: center;
@@ -17,30 +25,79 @@ background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
 }
 
 .main span {
-  font-family: "Avenir Next", sans-serif;
-	margin: 35px auto;
-	color: #D98324;
+	font-family: 'Avenir Next', sans-serif;
+	margin: 0px auto;
+	color: #b9f8d3;
 	font-size: 24px;
-  position: relative;
-  font-weight: 900;
-  text-transform: uppercase;
-  font-style: italic;
-  letter-spacing: 0.05em;
-  display: inline-block;
+	height: 15%;
+	position: relative;
+	font-weight: 900;
+	text-transform: uppercase;
+	font-style: italic;
+	letter-spacing: 0.05em;
+	display: inline-block;
 }
 
 span:before {
-  position: absolute;
-  left: 0;
-  top: 0;
-  content: attr(filter-content);
+	position: absolute;
+	left: 0;
+	top: 0;
+	content: attr(filter-content);
 
-  filter: url(#motion-blur-filter);
+	filter: url(#motion-blur-filter);
 }
 
 /* We hide the SVG filter element from the DOM as it would take up some space */
 
 .main > svg {
-  display: none;
+	display: none;
 }
 
+.signInSection {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+}
+
+.signInSection button {
+	width: 72%;
+	height: 30%;
+	margin: 15px auto;
+	border-radius: 35px;
+	cursor: pointer;
+}
+
+.signInSection svg {
+	margin-right: 10px;
+	margin-left: 5px;
+	font-size: 24px;
+}
+
+.signInGoogleBtn,
+.signInFacebookBtn {
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+  transition: 0.15s;
+}
+
+.signInGoogleBtn {
+	color: #0f0e0e;
+}
+
+.signInGoogleBtn:hover {
+  background-color: #ddd;
+}
+
+.signInFacebookBtn {
+	background-color: #0c3c78;
+	color: #f9f9f9;
+}
+
+.signInFacebookBtn:hover {
+  background-color: #0a2e5a;
+}
