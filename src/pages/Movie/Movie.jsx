@@ -26,6 +26,11 @@ const Movie = () => {
 	const [movie, setMovie] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 	const params = useParams()
+
+	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: 'smooth' })
+	}, [])
+
 	useEffect(async () => {
 		const fetchData = await getMovieDetail(params.movieId, 0)
 
@@ -110,8 +115,7 @@ const Movie = () => {
 							)}
 							<div
 								className={relativeSeriesSection}
-								style={!isRefList() ? {height: '100%'}: {}}
-								
+								style={!isRefList() ? { height: '100%' } : {}}
 							>
 								<Similar similarList={movie.likeList} />
 							</div>
