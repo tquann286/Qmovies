@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Player } from 'react-tuby'
 import 'react-tuby/css/main.css'
@@ -10,7 +10,7 @@ import { getMovieDetail, getMoviePreviewInfo } from '../../api'
 
 import { Navbar, ScrollToTop, InSeries, Similar } from '../../components'
 import { subtitleProxy } from '../../utilities'
-import {PROXY} from '../../shared/constants'
+import { PROXY } from '../../shared/constants'
 
 const Movie = () => {
 	const {
@@ -26,9 +26,6 @@ const Movie = () => {
 	const [movie, setMovie] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 	const params = useParams()
-
-	const movieRef = useRef()
-
 	useEffect(async () => {
 		const fetchData = await getMovieDetail(params.movieId, 0)
 
@@ -70,9 +67,9 @@ const Movie = () => {
 		setIsLoading(false)
 	}, [])
 
-	useEffect(() => {
-		movieRef?.current.scrollIntoView({ behavior: 'smooth' })
-	}, []);
+	const isRefList = () => {
+		return movie?.refList.length !== 0
+	}
 
 	return (
 		<div className={movieContainer}>
@@ -83,31 +80,39 @@ const Movie = () => {
 				</div>
 			) : (
 				<div className={movieMain}>
-					<div className={movieSection} ref={movieRef}>
+					<div className={movieSection}>
 						<div className={videoSection}>
 							<Player
 								src={movie.sourceInfo}
-								subtitles={movie.subtitlesInfo?.map((subtitle) => ({
-									...subtitle,
-									url: subtitleProxy(subtitle.url),
-								})) || []}
+								subtitles={
+									movie.subtitlesInfo?.map((subtitle) => ({
+										...subtitle,
+										url: subtitleProxy(subtitle.url),
+									})) || []
+								}
 								poster={movie.coverVerticalUrl}
 								pictureInPicture={true}
 							>
-							{(ref, props) => (
-								<HlsPlayer
-									playerRef={ref}
-									{...props}
-									src={`${PROXY}${props.src}`}
-								/>
-							)}
+								{(ref, props) => (
+									<HlsPlayer
+										playerRef={ref}
+										{...props}
+										src={`${PROXY}${props.src}`}
+									/>
+								)}
 							</Player>
 						</div>
 						<div className={relativeSection}>
-							<div className={inSeriesSection}>
-								<InSeries refList={movie.refList} />
-							</div>
-							<div className={relativeSeriesSection}>
+							{isRefList() && (
+								<div className={inSeriesSection}>
+									<InSeries refList={movie.refList} />
+								</div>
+							)}
+							<div
+								className={relativeSeriesSection}
+								style={!isRefList() ? {height: '100%'}: {}}
+								
+							>
 								<Similar similarList={movie.likeList} />
 							</div>
 						</div>

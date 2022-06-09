@@ -9,7 +9,7 @@ background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
 }
 
 .main {
-	height: 400px;
+	height: 70vh;
 	width: 350px;
 	background-color: rgb(43, 42, 42);
 	text-align: center;
@@ -17,16 +17,12 @@ background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
 }
 
 .main span {
-	margin: 35px auto;
-	color: #7577d5;
-	font-size: 24px;
-}
-
-span {
-  position: relative;
   font-family: "Avenir Next", sans-serif;
+	margin: 35px auto;
+	color: #D98324;
+	font-size: 24px;
+  position: relative;
   font-weight: 900;
-  font-size: 64px;
   text-transform: uppercase;
   font-style: italic;
   letter-spacing: 0.05em;
@@ -44,6 +40,6 @@ span:before {
 
 /* We hide the SVG filter element from the DOM as it would take up some space */
 
-svg {
+.main > svg {
   display: none;
 }
