@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from './SignIn.module.css'
 import { LogoIcon } from '../../components'
 
-import { auth, provider } from '../../shared/firebase'
+import { auth, googleProvider, facebookProvider } from '../../shared/firebase'
 import { signInWithPopup } from 'firebase/auth'
 import {FcGoogle} from 'react-icons/fc'
 import {ImFacebook} from 'react-icons/im'
@@ -13,7 +13,7 @@ const SignIn = () => {
 	const { container, logoIcon, main, signInGoogleBtn, signInSection, signInFacebookBtn } = styles
 
 	const signInWithGoogle = () => {
-		signInWithPopup(auth, provider)
+		signInWithPopup(auth, googleProvider)
 			.then((res) => {
 				console.log(res)
 			})
@@ -23,7 +23,13 @@ const SignIn = () => {
 	}
 
 	const signInWithFacebook = () => {
-		
+		signInWithPopup(auth, facebookProvider)
+			.then((res) => {
+				console.log(res)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
 	}
 
 	return (
