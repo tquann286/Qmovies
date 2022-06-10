@@ -1,5 +1,5 @@
 # Qmovies
-
+## Note: API đã chặn CORS nên web tạm ngưng phát triển  
 ### A one-stop video streaming platform for you to watch TV shows, movies, animation from all around the world! With wide variety of exclusive movies, you can choose multi-language subtitles.
 
 ![](https://i.imgur.com/waxVImv.png)
